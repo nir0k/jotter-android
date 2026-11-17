@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Labels owned by the design system components. Product text lives in the product. -->
+<resources>
+    <string name="ds_back">Back</string>
+    <string name="ds_close">Close</string>
+    <string name="ds_more">More options</string>
+    <string name="ds_search">Search</string>
+    <string name="ds_clear_search">Clear search</string>
+    <string name="ds_cancel">Cancel</string>
+    <string name="ds_save">Save</string>
+    <string name="ds_retry">Retry</string>
+    <string name="ds_loading">Loading…</string>
+    <string name="ds_show_filters">Show filters</string>
+    <string name="ds_hide_filters">Hide filters</string>
+    <string name="ds_filters_active">Filters are applied</string>
+    <string name="ds_clear_filters">Clear</string>
+    <string name="ds_sort_descending">Descending order</string>
+    <string name="ds_sort_ascending">Ascending order</string>
+    <string name="ds_open_on_map">Open on the map</string>
+    <string name="ds_copy_coordinates">Copy coordinates</string>
+    <string name="ds_no_map_app">No app can show this place on a map</string>
+    <string name="ds_show_password">Show password</string>
+    <string name="ds_hide_password">Hide password</string>
+    <string name="ds_offline">Offline. Saved data is shown.</string>
+    <string name="ds_viewer_counter">%1$d / %2$d</string>
+    <string name="ds_photo_actions">Photo actions</string>
+    <string name="ds_select_all">Select all</string>
+    <string name="ds_clear_selection">Clear selection</string>
+    <string name="ds_mark_favorite">Add to favourites</string>
+    <string name="ds_unmark_favorite">Remove from favourites</string>
+    <string name="ds_make_private">Make private</string>
+    <string name="ds_make_visible">Make visible to members</string>
+    <plurals name="ds_selected_count">
+        <item quantity="one">%d selected</item>
+        <item quantity="other">%d selected</item>
+    </plurals>
+    <string name="ds_status_ok">Working</string>
+    <string name="ds_status_warning">Needs attention</string>
+    <string name="ds_status_error">Error</string>
+    <string name="ds_theme_system">System</string>
+    <string name="ds_theme_light">Light</string>
+    <string name="ds_theme_dark">Dark</string>
+    <string name="ds_theme_dark_only">Dark only</string>
+    <string name="ds_theme_sample_title">Dolomites hut to hut</string>
+    <string name="ds_theme_sample_text">12–19 Jul · 8 days</string>
+    <string name="ds_theme_sample_badge">Ongoing</string>
+    <string name="ds_apply">Apply</string>
+    <string name="ds_filter_count">%1$s: %2$d</string>
+    <string name="ds_colour_default">Default</string>
+    <string name="ds_colour_custom">Custom colour…</string>
+    <string name="ds_colour_custom_title">Custom colour</string>
+    <string name="ds_colour_custom_field">Colour</string>
+    <string name="ds_colour_custom_hint">As #rrggbb, for example #ff8800</string>
+    <string name="ds_colour_custom_named">Custom colour %1$s</string>
+    <string name="ds_colour_sample">A</string>
+    <string name="ds_icon_none">No icon</string>
+    <string name="ds_icon_search">Search icons</string>
+    <string name="ds_icon_search_hint">Name, glyph or group</string>
+    <string name="ds_nothing_found">Nothing found</string>
+    <string name="ds_tree_expand">Expand %1$s</string>
+    <string name="ds_tree_collapse">Collapse %1$s</string>
+    <string name="ds_find">Find</string>
+    <string name="ds_replace_with">Replace with</string>
+    <string name="ds_find_next">Next match</string>
+    <string name="ds_find_previous">Previous match</string>
+    <string name="ds_replace">Replace</string>
+    <string name="ds_replace_all">Replace all</string>
+    <string name="ds_show_replace">Show replace</string>
+    <string name="ds_hide_replace">Hide replace</string>
+    <string name="ds_match_case">Match case</string>
+    <string name="ds_match_count">%1$d of %2$d</string>
+    <string name="ds_no_matches">No matches</string>
+    <string-array name="ds_tag_color_names">
+        <item>Red</item>
+        <item>Orange</item>
+        <item>Amber</item>
+        <item>Yellow</item>
+        <item>Lime</item>
+        <item>Green</item>
+        <item>Emerald</item>
+        <item>Teal</item>
+        <item>Cyan</item>
+        <item>Sky</item>
+        <item>Blue</item>
+        <item>Indigo</item>
+        <item>Violet</item>
+        <item>Purple</item>
+        <item>Fuchsia</item>
+        <item>Pink</item>
+        <item>Rose</item>
+        <item>Brown</item>
+        <item>Gray</item>
+        <item>Maroon</item>
+        <item>Coral</item>
+        <item>Gold</item>
+        <item>Beige</item>
+        <item>Olive</item>
+        <item>Mint</item>
+        <item>Navy</item>
+        <item>Lavender</item>
+        <item>Slate</item>
+        <item>Graphite</item>
+    </string-array>
+</resources>

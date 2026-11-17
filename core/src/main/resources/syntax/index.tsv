@@ -1,0 +1,72 @@
+Alerts	alert.xml
+Bash	bash.xml
+C	c.xml
+Clojure	clojure.xml
+CMake	cmake.xml
+Comments	comments.xml
+C++	cpp.xml
+C#	cs.xml
+CSS	css.xml
+CSV	csv.xml
+Dart	dart.xml
+.desktop	desktop.xml
+Diff	diff.xml
+Dockerfile	dockerfile.xml
+MS-DOS Batch	dosbat.xml
+Doxygen	doxygen.xml
+Elixir/EEx	elixir-eex.xml
+Elixir/HEEx	elixir-heex.xml
+Elixir	elixir.xml
+Email	email.xml
+Erlang	erlang.xml
+GCCExtensions	gcc.xml
+Go	go.xml
+GraphQL	graphql.xml
+Hamlet	hamlet.xml
+Haskell	haskell.xml
+HTML	html.xml
+INI Files	ini.xml
+ISO C++	isocpp.xml
+Java	java.xml
+Javadoc	javadoc.xml
+JavaScript React (JSX)	javascript-react.xml
+JavaScript	javascript.xml
+JSON	json.xml
+Julia	julia.xml
+Kotlin	kotlin.xml
+Lua	lua.xml
+Makefile	makefile.xml
+Markdown	markdown.xml
+Matlab	matlab.xml
+Modelines	modelines.xml
+Mustache/Handlebars (HTML)	mustache.xml
+nginx Configuration	nginx.xml
+Nim	nim.xml
+Objective-C	objectivec.xml
+Perl	perl.xml
+PHP/PHP	php.xml
+PowerShell	powershell.xml
+Protobuf	protobuf.xml
+Python	python.xml
+QML	qml.xml
+Raku	raku.xml
+reStructuredText	rest.xml
+Ruby/Rails/RHTML	rhtml.xml
+Ruby	ruby.xml
+Rust	rust.xml
+SASS	sass.xml
+Scala	scala.xml
+SCSS	scss.xml
+SPDX-Comments	spdx-comments.xml
+SQL (MySQL)	sql-mysql.xml
+SQL	sql.xml
+Swift	swift.xml
+systemd unit	systemd-unit.xml
+TOML	toml.xml
+TypeScript React (TSX)	typescript-react.xml
+TypeScript	typescript.xml
+Vue	vue.xml
+XML	xml.xml
+YAML	yaml.xml
+Zig	zig.xml
+Zsh	zsh.xml

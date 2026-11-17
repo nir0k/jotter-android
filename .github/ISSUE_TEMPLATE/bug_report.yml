@@ -1,0 +1,63 @@
+name: Bug report
+description: Something in Jotter for Android does not work as it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please check that the problem is still present in the latest release. Remove personal notes and credentials from anything you attach. Report vulnerabilities privately as described in SECURITY.md, not here.
+  - type: input
+    id: version
+    attributes:
+      label: Jotter for Android version
+      description: Shown in Settings → General → About.
+      placeholder: "0.11.0"
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: Pixel 9, Android 16
+    validations:
+      required: true
+  - type: dropdown
+    id: sync
+    attributes:
+      label: Synchronisation
+      description: Is the library synchronised through SFTP? If so, which server serves it?
+      options:
+        - "No"
+        - "Yes, OpenSSH"
+        - "Yes, SFTPGo"
+        - "Yes, another server"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Create a note
+        2. Insert a table
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: What happened instead; screenshots and error messages help.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log output
+      description: Output of `adb logcat --pid=$(adb shell pidof io.github.nir0k.jotter)` around the problem, if it shows anything relevant.
+      render: text

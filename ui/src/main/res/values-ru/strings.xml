@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_title">Настройки</string>
+    <string name="library_read_only">Эта библиотека создана более новой версией Jotter. Обновите приложение, чтобы её править.</string>
+    <string name="sync_retry">Повторить</string>
+    <string name="sync_conflicts_open">Открыть</string>
+    <string name="note_favorite">Добавить в избранное</string>
+    <string name="note_unfavorite">Убрать из избранного</string>
+    <string name="note_archive">В архив</string>
+    <string name="note_unarchive">Вернуть из архива</string>
+    <string name="note_trash">В корзину</string>
+    <string name="note_restore">Восстановить</string>
+    <string name="note_delete">Удалить навсегда</string>
+    <string name="item_icon">Значок</string>
+    <string name="item_color">Цвет</string>
+    <string name="tags_create">Добавить «%1$s»</string>
+    <string name="organize_failed">Не удалось сохранить изменение.</string>
+    <string name="undo">Отменить</string>
+    <string name="collection_name">Название</string>
+    <string name="collection_move">Переместить</string>
+    <string name="collection_move_title">Переместить «%1$s»</string>
+    <string name="collection_parent">Внутри</string>
+    <string name="collection_position">Место</string>
+    <string name="collection_top_level">Верхний уровень</string>
+    <string name="collection_at_end">В конце</string>
+    <string name="collection_before">Перед «%1$s»</string>
+    <string name="collection_delete_title">Удалить «%1$s»?</string>
+    <plurals name="collection_delete_collections">
+        <item quantity="one">Вместе с ней удалится %1$d подколлекция.</item>
+        <item quantity="few">Вместе с ней удалятся %1$d подколлекции.</item>
+        <item quantity="many">Вместе с ней удалятся %1$d подколлекций.</item>
+        <item quantity="other">Вместе с ней удалятся %1$d подколлекции.</item>
+    </plurals>
+    <plurals name="collection_delete_notes">
+        <item quantity="one">%1$d заметка останется в других коллекциях или во «Всех заметках».</item>
+        <item quantity="few">%1$d заметки останутся в других коллекциях или во «Всех заметках».</item>
+        <item quantity="many">%1$d заметок останутся в других коллекциях или во «Всех заметках».</item>
+        <item quantity="other">%1$d заметки останутся в других коллекциях или во «Всех заметках».</item>
+    </plurals>
+    <string name="collection_delete_orphans">Отправить в корзину заметки, которых нет в других коллекциях</string>
+    <string name="tree_actions">Действия: %1$s</string>
+    <string name="delete">Удалить</string>
+    <plurals name="delete_notes_title">
+        <item quantity="one">Удалить %1$d заметку навсегда?</item>
+        <item quantity="few">Удалить %1$d заметки навсегда?</item>
+        <item quantity="many">Удалить %1$d заметок навсегда?</item>
+        <item quantity="other">Удалить %1$d заметки навсегда?</item>
+    </plurals>
+    <string name="delete_notes_text">Удалённые заметки и их вложения вернуть нельзя.</string>
+    <!-- Export. -->
+    <string name="note_export">Экспорт</string>
+    <plurals name="export_title">
+        <item quantity="one">Экспорт %d заметки</item>
+        <item quantity="few">Экспорт %d заметок</item>
+        <item quantity="many">Экспорт %d заметок</item>
+        <item quantity="other">Экспорт %d заметок</item>
+    </plurals>
+    <string name="export_format">Формат</string>
+    <string name="export_pdf">PDF</string>
+    <string name="export_html">HTML</string>
+    <string name="export_jpg">JPG</string>
+    <string name="export_page_size">Размер страницы</string>
+    <string name="export_page_a4">A4</string>
+    <string name="export_page_letter">Letter</string>
+    <string name="export_several_hint">Заметки будут упакованы в ZIP-архив, по файлу на заметку.</string>
+    <string name="export_confirm">Экспортировать</string>
+    <string name="export_progress">%1$d из %2$d</string>
+    <string name="export_ready">%1$s готов.</string>
+    <string name="export_save">Сохранить</string>
+    <string name="export_share">Поделиться</string>
+    <string name="export_saved">%1$s сохранён</string>
+    <string name="export_failed">Экспорт не удался. Проверьте свободное место на телефоне и повторите попытку.</string>
+    <string name="export_save_failed">Не удалось сохранить файл.</string>
+    <string name="export_no_application">Нет приложения, которое может принять файл.</string>
+    <string name="export_archive_name">Заметки</string>
+    <string name="export_updated">Обновлено %1$s</string>
+    <string name="rules_filed_one">Правило поместило «%1$s» в %2$s.</string>
+    <plurals name="rules_filed">
+        <item quantity="one">Правила поместили %1$d заметку в %2$s.</item>
+        <item quantity="few">Правила поместили %1$d заметки в %2$s.</item>
+        <item quantity="many">Правила поместили %1$d заметок в %2$s.</item>
+        <item quantity="other">Правила поместили %1$d заметки в %2$s.</item>
+    </plurals>
+</resources>

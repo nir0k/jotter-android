@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="editor_copy">Copy</string>
+    <string name="editor_plain_text">Plain text</string>
+    <string name="editor_code_title">Title</string>
+    <string name="editor_size_units">B KB MB GB</string>
+    <string name="editor_placeholder">Start writing…</string>
+</resources>

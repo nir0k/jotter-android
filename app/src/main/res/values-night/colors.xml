@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The launcher icon's background in the phone's dark theme: the Warm palette's dark card colour. -->
+    <color name="ic_launcher_background">#1D232A</color>
+    <!-- The Warm palette's dark primary colour, as the design system defines it. -->
+    <color name="ic_shortcut_glyph">#FB923C</color>
+</resources>

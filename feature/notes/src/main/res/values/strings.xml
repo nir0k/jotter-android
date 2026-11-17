@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="collections_empty_text">Collections group notes; a note can belong to several.</string>
+    <string name="tags_empty_text">Add tags to a note from the line under its title.</string>
+    <string name="notes_failed">The notes could not be read.</string>
+    <string name="sort_label">Sort: %1$s</string>
+    <string name="sort_title_dialog">Sort by</string>
+    <string name="sort_updated">Date updated</string>
+    <string name="sort_created">Date created</string>
+    <string name="sort_title">Title</string>
+    <string name="filter_scopes">Search in</string>
+    <string name="scope_title">Title</string>
+    <string name="scope_text">Text</string>
+    <string name="scope_tags">Tags</string>
+    <string name="scope_collections">Collections</string>
+    <string name="filter_created">Created</string>
+    <string name="filter_updated">Updated</string>
+    <string name="filter_collections">Collections</string>
+    <string name="filter_tags">Tags</string>
+    <string name="filter_attachments">With attachments</string>
+    <string name="filter_location">With geotag</string>
+    <string name="filter_everywhere">Search everywhere</string>
+    <string name="filter_archived">Include archived</string>
+    <string name="no_matches_title">No matches</string>
+    <string name="no_matches_text">No note matches the search. Try other words or fewer filters.</string>
+    <string name="no_matches_clear">Clear search</string>
+    <string name="sync_banner_open">Open</string>
+    <string name="note_new">New note</string>
+    <string name="reorder_handle">Drag to reorder</string>
+    <string name="collection_new">New collection</string>
+    <string name="collection_new_child">New subcollection</string>
+    <string name="collection_create">Create</string>
+    <string name="collection_rename">Rename</string>
+    <string name="tag_rename">Rename tag</string>
+    <string name="tag_delete_title">Delete the tag “%1$s”?</string>
+    <plurals name="tag_delete_text">
+        <item quantity="one">It and its child tags are removed from %1$d note.</item>
+        <item quantity="other">It and its child tags are removed from %1$d notes.</item>
+    </plurals>
+    <plurals name="tag_renamed">
+        <item quantity="one">Renamed in %1$d note</item>
+        <item quantity="other">Renamed in %1$d notes</item>
+    </plurals>
+    <string name="collection_new_rule">New rule</string>
+    <string name="selection_add_collection">Add to collection</string>
+    <string name="selection_remove_collection">Remove from this collection</string>
+    <string name="selection_add_tag">Add tag</string>
+    <plurals name="selection_archived">
+        <item quantity="one">%1$d note archived</item>
+        <item quantity="other">%1$d notes archived</item>
+    </plurals>
+    <plurals name="selection_unarchived">
+        <item quantity="one">%1$d note returned from the archive</item>
+        <item quantity="other">%1$d notes returned from the archive</item>
+    </plurals>
+    <plurals name="selection_trashed">
+        <item quantity="one">%1$d note moved to the trash</item>
+        <item quantity="other">%1$d notes moved to the trash</item>
+    </plurals>
+    <plurals name="selection_restored">
+        <item quantity="one">%1$d note restored</item>
+        <item quantity="other">%1$d notes restored</item>
+    </plurals>
+    <string name="home_collections">Collections</string>
+    <string name="home_tags">Tags</string>
+    <string name="search_open">Search</string>
+    <string name="search_placeholder">Search notes…</string>
+    <string name="search_hint">Type to search these notes</string>
+</resources>

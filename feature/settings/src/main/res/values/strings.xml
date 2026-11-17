@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_mode">Light or dark</string>
+    <string name="settings_mode_fixed">%1$s has only a dark variant.</string>
+    <string name="settings_language">Language</string>
+    <string name="language_system">System</string>
+    <string name="themes_intro">Each theme is shown in its own colours. The light or dark choice is in Settings.</string>
+    <string name="first_start_intro">Notes are kept in a library on this phone. Until a sync storage is connected, it exists only here.</string>
+    <string name="first_start_create">Create library</string>
+    <string name="first_start_failed">The library could not be created. Check the free space on the phone and try again.</string>
+    <string name="settings_notes">Notes</string>
+    <string name="settings_location">Add location to new notes</string>
+    <string name="settings_location_text">New notes get the phone\'s position as a geotag. The location permission is asked once.</string>
+    <string name="settings_retention">Keep notes in the trash</string>
+    <plurals name="retention_days">
+        <item quantity="one">%d day</item>
+        <item quantity="other">%d days</item>
+    </plurals>
+    <string name="retention_never">Until the trash is emptied</string>
+    <string name="settings_library">Library</string>
+    <string name="library_notes">Notes</string>
+    <plurals name="notes_count">
+        <item quantity="one">%d note</item>
+        <item quantity="other">%d notes</item>
+    </plurals>
+    <string name="library_problems">Problems</string>
+    <string name="library_rebuild">Rebuild index</string>
+    <string name="library_create">Create another library</string>
+    <string name="library_delete">Delete library from this phone</string>
+    <string name="library_delete_text">Deleting removes the library and its notes from this phone only; copies on sync storages stay.</string>
+    <string name="library_delete_action">Delete</string>
+    <string name="library_delete_title">Delete the library from this phone?</string>
+    <string name="library_delete_confirm">%1$s and their attachments will be deleted from this phone. This cannot be undone here; copies on sync storages stay.</string>
+    <string name="problems_intro">These note files cannot be read or hold formatting Jotter does not support. Jotter leaves them unchanged.</string>
+    <string name="problems_copy_action">Create normalised copy</string>
+    <string name="problems_copy_confirm">Unsupported formatting will be simplified in a new note with its own attachments. The original file will be kept unchanged.</string>
+    <string name="problems_delete_action">Delete original</string>
+    <string name="problems_delete_confirm">The file and its attachments will be deleted permanently, also on the devices this library synchronises with. A normalised copy keeps its own files; create one first if it is not made yet.</string>
+    <string name="problems_empty_title">No problems</string>
+    <string name="problems_empty_text">Every note file of the library reads.</string>
+    <string name="problem_malformed">The file does not follow the note format.</string>
+    <string name="problem_newer">The note was written by a newer Jotter.</string>
+    <string name="problem_missing">The file is missing.</string>
+    <string name="problem_unreadable">The file could not be read.</string>
+    <string name="settings_about">About</string>
+    <string name="about_version">Version</string>
+    <string name="about_licenses">Licences</string>
+    <string name="component_bootstrap" translatable="false">Bootstrap Icons</string>
+    <string name="component_ksyntaxhighlighting" translatable="false">KDE SyntaxHighlighting definitions and themes</string>
+    <string name="component_androidx" translatable="false">AndroidX, Jetpack Compose, Material 3, Guava ListenableFuture</string>
+    <string name="component_kotlin" translatable="false">Kotlin, kotlinx.coroutines, kotlinx.serialization</string>
+    <string name="component_protobuf" translatable="false">Protocol Buffers</string>
+    <string name="component_snowball" translatable="false">Snowball</string>
+    <string name="license_mit" translatable="false">MIT</string>
+    <string name="license_apache" translatable="false">Apache 2.0</string>
+    <string name="license_bsd" translatable="false">BSD 3-Clause</string>
+    <string name="license_ksyntaxhighlighting" translatable="false">MIT, LGPL, GPL</string>
+    <string name="first_start_download">Download from SFTP</string>
+    <string name="library_local_only">This library exists only on this phone. Connect a sync storage to keep a second copy and share it with your computers.</string>
+    <string name="settings_sync">Synchronisation</string>
+    <string name="component_sshj" translatable="false">sshj, ASN.1 One</string>
+    <string name="component_slf4j" translatable="false">SLF4J</string>
+    <string name="component_bouncycastle" translatable="false">Bouncy Castle</string>
+    <!-- Rules. -->
+    <string name="settings_rules">Rules</string>
+    <string name="settings_rules_none">None</string>
+    <string name="settings_rules_row">Filing notes by tags</string>
+    <string name="rules_read_failed">The rules could not be read.</string>
+    <string name="rules_empty_title">No rules yet</string>
+    <string name="rules_empty_text">Rules add notes to collections by their tags, when a note is created or its tags change.</string>
+    <string name="rule_new">New rule</string>
+    <string name="rule_edit">Edit rule</string>
+    <string name="rule_enable">Enable “%1$s”</string>
+    <plurals name="rule_conditions">
+        <item quantity="one">%d condition</item>
+        <item quantity="other">%d conditions</item>
+    </plurals>
+    <string name="rule_adds_to">adds to %1$s</string>
+    <string name="rule_moves_to">moves to %1$s</string>
+    <string name="rule_deleted_collection">a deleted collection</string>
+    <string name="rule_stops">stops</string>
+    <string name="rule_unsupported">Conditions Jotter for Android does not support: the rule works on the computer only.</string>
+    <string name="rule_move_up">Move up</string>
+    <string name="rule_move_down">Move down</string>
+    <string name="rule_apply">Apply to existing notes</string>
+    <string name="rule_apply_title">Apply the rule “%1$s”?</string>
+    <plurals name="rule_apply_text">
+        <item quantity="one">It changes the collections of %d note.</item>
+        <item quantity="other">It changes the collections of %d notes.</item>
+    </plurals>
+    <string name="rule_apply_action">Apply</string>
+    <string name="rule_apply_none">The rule changes no notes.</string>
+    <string name="rule_delete_title">Delete the rule “%1$s”?</string>
+    <string name="rule_delete_text">Notes it has filed stay in their collections.</string>
+    <string name="rule_name">Name</string>
+    <string name="rule_name_error">Enter a name for the rule.</string>
+    <string name="rule_match">Notes match</string>
+    <string name="rule_match_all">All conditions</string>
+    <string name="rule_match_any">Any condition</string>
+    <string name="rule_conditions">Conditions</string>
+    <string name="rule_condition_tag">Has the tag %1$s</string>
+    <string name="rule_condition_no_tags">Has no tags</string>
+    <string name="rule_condition_remove">Remove “%1$s”</string>
+    <string name="rule_add_tags">Has the tag…</string>
+    <string name="rule_tags_title">Has the tag</string>
+    <string name="rule_conditions_error">Add a condition.</string>
+    <string name="rule_action">Action</string>
+    <string name="rule_action_add">Add</string>
+    <string name="rule_action_move">Move</string>
+    <string name="rule_collections">Collections</string>
+    <string name="rule_collection">Collection</string>
+    <string name="rule_choose">Choose…</string>
+    <string name="rule_collection_error">Choose a collection.</string>
+    <string name="rule_no_collections">Create a collection first: rules file notes into collections.</string>
+    <string name="rule_stop">Stop after this rule</string>
+    <string name="rule_stop_text">Rules after this one are skipped for a note that matches it.</string>
+    <string name="rule_hint">A rule acts when a note starts matching it: when the note is created or its tags change. Archived and trashed notes are left alone.</string>
+    <string name="rule_discard_title">Discard changes?</string>
+    <string name="rule_discard_text">The rule stays as it was saved.</string>
+    <string name="rule_discard_action">Discard</string>
+    <string name="settings_general">General</string>
+    <string name="libraries_title">Libraries</string>
+    <string name="library_on_phone">Library on this phone</string>
+    <string name="library_changed">Changed %1$s</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lint settings of every module; build-logic points each Android module at this file. -->
+<lint>
+    <!-- Bouncy Castle's PKIX jar carries TLS helpers Jotter never uses: sshj speaks SSH, not TLS, and R8
+         removes them from the release build. -->
+    <issue id="TrustAllX509TrustManager">
+        <ignore path="**/bcpkix-jdk18on-*.jar" />
+    </issue>
+    <!-- The language is chosen in the application, and the APK carries every language (the app module
+         turns the bundle's language split off), so no language is downloaded on demand. -->
+    <issue id="AppBundleLocaleChanges" severity="ignore" />
+</lint>

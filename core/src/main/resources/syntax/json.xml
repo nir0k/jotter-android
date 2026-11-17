@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language>
+<!--
+  JSON (RFC 8259) for Jotter for Android, in the format of KDE SyntaxHighlighting's definitions.
+  Written for this project; licensed under the Apache License 2.0 like the rest of it.
+  Object keys and string values are told apart, escapes are marked, and the comments of JSONC
+  are accepted, as code pasted into notes often carries them. Nothing is reported as an error:
+  a note may hold a fragment of a document.
+-->
+<language name="JSON" section="Markup" version="1" kateversion="5.0" extensions="*.json;*.jsonc;*.jsonl;*.ndjson;*.geojson" mimetype="application/json" author="Jotter for Android contributors" license="Apache-2.0">
+  <highlighting>
+    <list name="literals">
+      <item>true</item>
+      <item>false</item>
+      <item>null</item>
+    </list>
+
+    <contexts>
+      <context name="Document" attribute="Normal" lineEndContext="#stay">
+        <DetectSpaces attribute="Normal" context="#stay"/>
+        <Detect2Chars attribute="Comment" context="LineComment" char="/" char1="/"/>
+        <Detect2Chars attribute="Comment" context="BlockComment" char="/" char1="*"/>
+        <!-- A string followed by a colon on the same line is a key. -->
+        <RegExpr attribute="Key" context="Key" String="&quot;(?=(?:[^&quot;\\]|\\.)*&quot;\s*:)"/>
+        <DetectChar attribute="String" context="String" char="&quot;"/>
+        <keyword attribute="Literal" context="#stay" String="literals"/>
+        <RegExpr attribute="Float" context="#stay" String="-?(?:0|[1-9][0-9]*)(?:\.[0-9]+(?:[eE][+-]?[0-9]+)?|[eE][+-]?[0-9]+)\b"/>
+        <RegExpr attribute="Number" context="#stay" String="-?(?:0|[1-9][0-9]*)\b"/>
+        <AnyChar attribute="Punctuation" context="#stay" String="{}[],:"/>
+      </context>
+
+      <context name="Key" attribute="Key" lineEndContext="#pop">
+        <RegExpr attribute="Escape" context="#stay" String="\\(?:[&quot;\\/bfnrt]|u[0-9A-Fa-f]{4})"/>
+        <DetectChar attribute="Key" context="#pop" char="&quot;"/>
+      </context>
+
+      <context name="String" attribute="String" lineEndContext="#pop">
+        <RegExpr attribute="Escape" context="#stay" String="\\(?:[&quot;\\/bfnrt]|u[0-9A-Fa-f]{4})"/>
+        <DetectChar attribute="String" context="#pop" char="&quot;"/>
+      </context>
+
+      <context name="LineComment" attribute="Comment" lineEndContext="#pop"/>
+
+      <context name="BlockComment" attribute="Comment" lineEndContext="#stay">
+        <Detect2Chars attribute="Comment" context="#pop" char="*" char1="/"/>
+      </context>
+    </contexts>
+
+    <itemDatas>
+      <itemData name="Normal" defStyleNum="dsNormal"/>
+      <itemData name="Key" defStyleNum="dsDataType"/>
+      <itemData name="String" defStyleNum="dsString"/>
+      <itemData name="Escape" defStyleNum="dsSpecialChar"/>
+      <itemData name="Literal" defStyleNum="dsConstant"/>
+      <itemData name="Number" defStyleNum="dsDecVal"/>
+      <itemData name="Float" defStyleNum="dsFloat"/>
+      <itemData name="Punctuation" defStyleNum="dsOperator"/>
+      <itemData name="Comment" defStyleNum="dsComment"/>
+    </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start="//"/>
+      <comment name="multiLine" start="/*" end="*/"/>
+    </comments>
+  </general>
+</language>

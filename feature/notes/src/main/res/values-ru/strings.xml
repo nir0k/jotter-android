@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="collections_empty_text">Коллекции объединяют заметки; заметка может входить в несколько.</string>
+    <string name="tags_empty_text">Добавляйте теги к заметке в строке под её названием.</string>
+    <string name="notes_failed">Не удалось прочитать заметки.</string>
+    <string name="sort_label">Сортировка: %1$s</string>
+    <string name="sort_title_dialog">Сортировать по</string>
+    <string name="sort_updated">Дата изменения</string>
+    <string name="sort_created">Дата создания</string>
+    <string name="sort_title">Заголовок</string>
+    <string name="filter_scopes">Искать в</string>
+    <string name="scope_title">Заголовок</string>
+    <string name="scope_text">Текст</string>
+    <string name="scope_tags">Теги</string>
+    <string name="scope_collections">Коллекции</string>
+    <string name="filter_created">Создана</string>
+    <string name="filter_updated">Изменена</string>
+    <string name="filter_collections">Коллекции</string>
+    <string name="filter_tags">Теги</string>
+    <string name="filter_attachments">С вложениями</string>
+    <string name="filter_location">С геометкой</string>
+    <string name="filter_everywhere">Искать везде</string>
+    <string name="filter_archived">Включая архив</string>
+    <string name="no_matches_title">Ничего не найдено</string>
+    <string name="no_matches_text">Ни одна заметка не подходит. Попробуйте другие слова или меньше фильтров.</string>
+    <string name="no_matches_clear">Очистить поиск</string>
+    <string name="sync_banner_open">Открыть</string>
+    <string name="note_new">Новая заметка</string>
+    <string name="reorder_handle">Перетащите, чтобы изменить порядок</string>
+    <string name="collection_new">Новая коллекция</string>
+    <string name="collection_new_child">Новая подколлекция</string>
+    <string name="collection_create">Создать</string>
+    <string name="collection_rename">Переименовать</string>
+    <string name="tag_rename">Переименовать тег</string>
+    <string name="tag_delete_title">Удалить тег «%1$s»?</string>
+    <plurals name="tag_delete_text">
+        <item quantity="one">Он и его дочерние теги будут убраны из %1$d заметки.</item>
+        <item quantity="few">Он и его дочерние теги будут убраны из %1$d заметок.</item>
+        <item quantity="many">Он и его дочерние теги будут убраны из %1$d заметок.</item>
+        <item quantity="other">Он и его дочерние теги будут убраны из %1$d заметки.</item>
+    </plurals>
+    <plurals name="tag_renamed">
+        <item quantity="one">Переименован в %1$d заметке</item>
+        <item quantity="few">Переименован в %1$d заметках</item>
+        <item quantity="many">Переименован в %1$d заметках</item>
+        <item quantity="other">Переименован в %1$d заметки</item>
+    </plurals>
+    <string name="collection_new_rule">Новое правило</string>
+    <string name="selection_add_collection">Добавить в коллекцию</string>
+    <string name="selection_remove_collection">Убрать из этой коллекции</string>
+    <string name="selection_add_tag">Добавить тег</string>
+    <plurals name="selection_archived">
+        <item quantity="one">%1$d заметка в архиве</item>
+        <item quantity="few">%1$d заметки в архиве</item>
+        <item quantity="many">%1$d заметок в архиве</item>
+        <item quantity="other">%1$d заметки в архиве</item>
+    </plurals>
+    <plurals name="selection_unarchived">
+        <item quantity="one">%1$d заметка возвращена из архива</item>
+        <item quantity="few">%1$d заметки возвращены из архива</item>
+        <item quantity="many">%1$d заметок возвращено из архива</item>
+        <item quantity="other">%1$d заметки возвращены из архива</item>
+    </plurals>
+    <plurals name="selection_trashed">
+        <item quantity="one">%1$d заметка в корзине</item>
+        <item quantity="few">%1$d заметки в корзине</item>
+        <item quantity="many">%1$d заметок в корзине</item>
+        <item quantity="other">%1$d заметки в корзине</item>
+    </plurals>
+    <plurals name="selection_restored">
+        <item quantity="one">%1$d заметка восстановлена</item>
+        <item quantity="few">%1$d заметки восстановлены</item>
+        <item quantity="many">%1$d заметок восстановлено</item>
+        <item quantity="other">%1$d заметки восстановлены</item>
+    </plurals>
+    <string name="home_collections">Коллекции</string>
+    <string name="home_tags">Теги</string>
+    <string name="search_open">Поиск</string>
+    <string name="search_placeholder">Поиск заметок…</string>
+    <string name="search_hint">Начните вводить, чтобы найти заметки</string>
+</resources>

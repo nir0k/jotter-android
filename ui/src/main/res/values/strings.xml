@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Jotter</string>
+    <string name="settings_title">Settings</string>
+    <string name="library_read_only">This library was written by a newer Jotter. Update the application to edit it.</string>
+    <string name="sync_retry">Retry</string>
+    <string name="sync_conflicts_open">Open</string>
+    <string name="note_favorite">Add to favourites</string>
+    <string name="note_unfavorite">Remove from favourites</string>
+    <string name="note_archive">Archive</string>
+    <string name="note_unarchive">Unarchive</string>
+    <string name="note_trash">Move to trash</string>
+    <string name="note_restore">Restore</string>
+    <string name="note_delete">Delete permanently</string>
+    <string name="item_icon">Icon</string>
+    <string name="item_color">Colour</string>
+    <string name="tags_create">Add “%1$s”</string>
+    <string name="organize_failed">The change could not be saved.</string>
+    <string name="undo">Undo</string>
+    <string name="collection_name">Name</string>
+    <string name="collection_move">Move</string>
+    <string name="collection_move_title">Move “%1$s”</string>
+    <string name="collection_parent">Inside</string>
+    <string name="collection_position">Position</string>
+    <string name="collection_top_level">Top level</string>
+    <string name="collection_at_end">At the end</string>
+    <string name="collection_before">Before “%1$s”</string>
+    <string name="collection_delete_title">Delete “%1$s”?</string>
+    <plurals name="collection_delete_collections">
+        <item quantity="one">%1$d subcollection is deleted with it.</item>
+        <item quantity="other">%1$d subcollections are deleted with it.</item>
+    </plurals>
+    <plurals name="collection_delete_notes">
+        <item quantity="one">%1$d note leaves it and stays in its other collections or in All notes.</item>
+        <item quantity="other">%1$d notes leave it and stay in their other collections or in All notes.</item>
+    </plurals>
+    <string name="collection_delete_orphans">Move notes in no other collection to the trash</string>
+    <string name="tree_actions">Actions of %1$s</string>
+    <string name="delete">Delete</string>
+    <plurals name="delete_notes_title">
+        <item quantity="one">Delete %1$d note permanently?</item>
+        <item quantity="other">Delete %1$d notes permanently?</item>
+    </plurals>
+    <string name="delete_notes_text">Deleted notes and their attachments cannot be brought back.</string>
+    <!-- Export. -->
+    <string name="note_export">Export</string>
+    <plurals name="export_title">
+        <item quantity="one">Export %d note</item>
+        <item quantity="other">Export %d notes</item>
+    </plurals>
+    <string name="export_format">Format</string>
+    <string name="export_pdf">PDF</string>
+    <string name="export_html">HTML</string>
+    <string name="export_jpg">JPG</string>
+    <string name="export_page_size">Page size</string>
+    <string name="export_page_a4">A4</string>
+    <string name="export_page_letter">Letter</string>
+    <string name="export_several_hint">The notes are packed into a ZIP archive, one file per note.</string>
+    <string name="export_confirm">Export</string>
+    <string name="export_progress">%1$d of %2$d</string>
+    <string name="export_ready">%1$s is ready.</string>
+    <string name="export_save">Save</string>
+    <string name="export_share">Share</string>
+    <string name="export_saved">%1$s saved</string>
+    <string name="export_failed">The export failed. Check the free space on the phone and try again.</string>
+    <string name="export_save_failed">The file could not be saved.</string>
+    <string name="export_no_application">No application can take the file.</string>
+    <string name="export_archive_name">Notes</string>
+    <string name="export_updated">Updated %1$s</string>
+    <string name="rules_filed_one">A rule filed “%1$s” into %2$s.</string>
+    <plurals name="rules_filed">
+        <item quantity="one">Rules filed %1$d note into %2$s.</item>
+        <item quantity="other">Rules filed %1$d notes into %2$s.</item>
+    </plurals>
+</resources>

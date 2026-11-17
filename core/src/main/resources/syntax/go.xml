@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language>
+<!--
+  Go, after The Go Programming Language Specification (go.dev/ref/spec), for Jotter for Android,
+  in the format of KDE SyntaxHighlighting's definitions.
+  Written for this project; licensed under the Apache License 2.0 like the rest of it.
+-->
+<language name="Go" section="Sources" version="1" kateversion="5.0" extensions="*.go" mimetype="text/x-go" author="Jotter for Android contributors" license="Apache-2.0">
+  <highlighting>
+    <list name="control">
+      <item>break</item>
+      <item>case</item>
+      <item>continue</item>
+      <item>default</item>
+      <item>defer</item>
+      <item>else</item>
+      <item>fallthrough</item>
+      <item>for</item>
+      <item>go</item>
+      <item>goto</item>
+      <item>if</item>
+      <item>range</item>
+      <item>return</item>
+      <item>select</item>
+      <item>switch</item>
+    </list>
+    <list name="keywords">
+      <item>chan</item>
+      <item>const</item>
+      <item>func</item>
+      <item>import</item>
+      <item>interface</item>
+      <item>map</item>
+      <item>package</item>
+      <item>struct</item>
+      <item>type</item>
+      <item>var</item>
+    </list>
+    <list name="types">
+      <item>any</item>
+      <item>bool</item>
+      <item>byte</item>
+      <item>comparable</item>
+      <item>complex64</item>
+      <item>complex128</item>
+      <item>error</item>
+      <item>float32</item>
+      <item>float64</item>
+      <item>int</item>
+      <item>int8</item>
+      <item>int16</item>
+      <item>int32</item>
+      <item>int64</item>
+      <item>rune</item>
+      <item>string</item>
+      <item>uint</item>
+      <item>uint8</item>
+      <item>uint16</item>
+      <item>uint32</item>
+      <item>uint64</item>
+      <item>uintptr</item>
+    </list>
+    <list name="constants">
+      <item>true</item>
+      <item>false</item>
+      <item>iota</item>
+      <item>nil</item>
+    </list>
+    <list name="builtins">
+      <item>append</item>
+      <item>cap</item>
+      <item>clear</item>
+      <item>close</item>
+      <item>complex</item>
+      <item>copy</item>
+      <item>delete</item>
+      <item>imag</item>
+      <item>len</item>
+      <item>make</item>
+      <item>max</item>
+      <item>min</item>
+      <item>new</item>
+      <item>panic</item>
+      <item>print</item>
+      <item>println</item>
+      <item>real</item>
+      <item>recover</item>
+    </list>
+
+    <contexts>
+      <context name="Code" attribute="Normal" lineEndContext="#stay">
+        <DetectSpaces attribute="Normal" context="#stay"/>
+        <Detect2Chars attribute="Comment" context="LineComment" char="/" char1="/"/>
+        <Detect2Chars attribute="Comment" context="BlockComment" char="/" char1="*"/>
+        <DetectChar attribute="String" context="String" char="&quot;"/>
+        <DetectChar attribute="Raw String" context="RawString" char="`"/>
+        <RegExpr attribute="Rune" context="#stay" String="'(?:\\(?:[abfnrtv\\'&quot;]|[0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})|[^'\\])'"/>
+        <keyword attribute="Control" context="#stay" String="control"/>
+        <keyword attribute="Keyword" context="#stay" String="keywords"/>
+        <keyword attribute="Type" context="#stay" String="types"/>
+        <keyword attribute="Constant" context="#stay" String="constants"/>
+        <keyword attribute="Builtin" context="#stay" String="builtins"/>
+        <!-- Numbers: floats first, as they may start like an integer; then other bases; then decimals. -->
+        <RegExpr attribute="Float" context="#stay" String="(?:\b[0-9][0-9_]*\.(?:[0-9][0-9_]*)?(?:[eE][+-]?[0-9_]+)?|\.[0-9][0-9_]*(?:[eE][+-]?[0-9_]+)?|\b[0-9][0-9_]*[eE][+-]?[0-9_]+|\b0[xX][0-9A-Fa-f_]*\.?[0-9A-Fa-f_]*[pP][+-]?[0-9_]+)i?"/>
+        <RegExpr attribute="Base" context="#stay" String="\b0(?:[xX][0-9A-Fa-f_]+|[bB][01_]+|[oO]?[0-7_]+)i?\b"/>
+        <RegExpr attribute="Number" context="#stay" String="\b[0-9][0-9_]*i?\b"/>
+        <RegExpr attribute="Function" context="#stay" String="\b[A-Za-z_][A-Za-z0-9_]*(?=\s*\()"/>
+        <DetectIdentifier attribute="Normal" context="#stay"/>
+        <AnyChar attribute="Operator" context="#stay" String="+-*/%&amp;|^&lt;&gt;=!~:"/>
+      </context>
+
+      <context name="String" attribute="String" lineEndContext="#pop">
+        <RegExpr attribute="Escape" context="#stay" String="\\(?:[abfnrtv\\'&quot;]|[0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})"/>
+        <!-- The verbs of package fmt, which strings passed to Printf and friends carry. -->
+        <RegExpr attribute="Verb" context="#stay" String="%[-+# 0]*(?:\[[0-9]+\])?(?:\*|[0-9]+)?(?:\.(?:\*|[0-9]+)?)?[vTtbcdoOqxXUeEfFgGsp%]"/>
+        <DetectChar attribute="String" context="#pop" char="&quot;"/>
+      </context>
+
+      <context name="RawString" attribute="Raw String" lineEndContext="#stay">
+        <DetectChar attribute="Raw String" context="#pop" char="`"/>
+      </context>
+
+      <context name="LineComment" attribute="Comment" lineEndContext="#pop"/>
+
+      <context name="BlockComment" attribute="Comment" lineEndContext="#stay">
+        <Detect2Chars attribute="Comment" context="#pop" char="*" char1="/"/>
+      </context>
+    </contexts>
+
+    <itemDatas>
+      <itemData name="Normal" defStyleNum="dsNormal"/>
+      <itemData name="Control" defStyleNum="dsControlFlow"/>
+      <itemData name="Keyword" defStyleNum="dsKeyword"/>
+      <itemData name="Type" defStyleNum="dsDataType"/>
+      <itemData name="Constant" defStyleNum="dsConstant"/>
+      <itemData name="Builtin" defStyleNum="dsBuiltIn"/>
+      <itemData name="Function" defStyleNum="dsFunction"/>
+      <itemData name="Number" defStyleNum="dsDecVal"/>
+      <itemData name="Base" defStyleNum="dsBaseN"/>
+      <itemData name="Float" defStyleNum="dsFloat"/>
+      <itemData name="Rune" defStyleNum="dsChar"/>
+      <itemData name="String" defStyleNum="dsString"/>
+      <itemData name="Raw String" defStyleNum="dsVerbatimString"/>
+      <itemData name="Escape" defStyleNum="dsSpecialChar"/>
+      <itemData name="Verb" defStyleNum="dsSpecialString"/>
+      <itemData name="Operator" defStyleNum="dsOperator"/>
+      <itemData name="Comment" defStyleNum="dsComment"/>
+    </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start="//"/>
+      <comment name="multiLine" start="/*" end="*/"/>
+    </comments>
+  </general>
+</language>

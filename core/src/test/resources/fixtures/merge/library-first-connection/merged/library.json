@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-01T10:00:00.000Z",
+  "favorites": [
+    {
+      "id": "01a1872b-a000-7000-8000-000000000002",
+      "kind": "note"
+    }
+  ],
+  "format": 1,
+  "id": "01a1872b-d000-7000-8000-000000000001",
+  "settings": {
+    "trashRetentionDays": 7
+  },
+  "tagColors": {
+    "home": "green",
+    "work": "red"
+  },
+  "tombstones": [
+    {
+      "deleted": "2026-09-30T12:00:00.000Z",
+      "id": "01a1872b-a000-7000-8000-000000000004"
+    }
+  ]
+}

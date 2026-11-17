@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "rules": [
+    {
+      "action": {
+        "collections": [
+          "01a1872b-97ac-728a-b545-49f3cdfb242a",
+          "01a1872b-97ae-74ad-9b8d-049103f8499f"
+        ],
+        "kind": "add"
+      },
+      "conditions": [
+        {
+          "field": "tag",
+          "op": "equals",
+          "value": "work"
+        },
+        {
+          "field": "tag",
+          "op": "equals",
+          "value": "Планы"
+        }
+      ],
+      "created": "2026-10-20T08:02:00.000Z",
+      "enabled": true,
+      "id": "01a1872b-97b4-71f5-be24-84e81a41f47a",
+      "match": "all",
+      "name": "Work plans",
+      "stop": false,
+      "updated": "2026-10-20T08:02:00.000Z"
+    },
+    {
+      "action": {
+        "collections": [
+          "01a1872b-97b2-71e7-80a2-4cd6e197e3e5"
+        ],
+        "kind": "move"
+      },
+      "caseSensitive": true,
+      "conditions": [
+        {
+          "field": "title",
+          "op": "matches",
+          "value": "^\\d{4}-\\d{2}"
+        },
+        {
+          "field": "tag",
+          "op": "matches",
+          "value": "^read"
+        }
+      ],
+      "created": "2026-10-20T08:02:00.000Z",
+      "enabled": true,
+      "futureField": "kept",
+      "id": "01a1872b-97b6-7352-9c57-6da3bb30882f",
+      "match": "any",
+      "name": "Dated reading (earlier version)",
+      "stop": true,
+      "updated": "2026-10-20T08:02:00.000Z"
+    },
+    {
+      "action": {
+        "collections": [
+          "01a1872b-97b0-75b5-b225-91bfaaa4f96c"
+        ],
+        "kind": "add"
+      },
+      "conditions": [
+        {
+          "field": "tags",
+          "op": "none"
+        },
+        {
+          "field": "tag",
+          "op": "equals",
+          "value": "inbox"
+        }
+      ],
+      "created": "2026-10-20T08:02:00.000Z",
+      "enabled": false,
+      "id": "01a1872b-97b8-72ba-830d-b1c1dbdda632",
+      "match": "any",
+      "name": "Untagged inbox",
+      "stop": false,
+      "updated": "2026-10-20T08:02:00.000Z"
+    }
+  ]
+}

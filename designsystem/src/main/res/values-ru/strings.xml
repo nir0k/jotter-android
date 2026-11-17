@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ds_back">Назад</string>
+    <string name="ds_close">Закрыть</string>
+    <string name="ds_more">Ещё</string>
+    <string name="ds_search">Поиск</string>
+    <string name="ds_clear_search">Очистить поиск</string>
+    <string name="ds_cancel">Отмена</string>
+    <string name="ds_save">Сохранить</string>
+    <string name="ds_retry">Повторить</string>
+    <string name="ds_loading">Загрузка…</string>
+    <string name="ds_show_filters">Показать фильтры</string>
+    <string name="ds_hide_filters">Скрыть фильтры</string>
+    <string name="ds_filters_active">Применены фильтры</string>
+    <string name="ds_clear_filters">Сбросить</string>
+    <string name="ds_sort_descending">По убыванию</string>
+    <string name="ds_sort_ascending">По возрастанию</string>
+    <string name="ds_open_on_map">Открыть на карте</string>
+    <string name="ds_copy_coordinates">Скопировать координаты</string>
+    <string name="ds_no_map_app">Нет приложения, чтобы показать это место на карте</string>
+    <string name="ds_show_password">Показать пароль</string>
+    <string name="ds_hide_password">Скрыть пароль</string>
+    <string name="ds_offline">Нет сети. Показаны сохранённые данные.</string>
+    <string name="ds_viewer_counter">%1$d / %2$d</string>
+    <string name="ds_photo_actions">Действия с фото</string>
+    <string name="ds_select_all">Выбрать все</string>
+    <string name="ds_clear_selection">Снять выбор</string>
+    <string name="ds_mark_favorite">В избранное</string>
+    <string name="ds_unmark_favorite">Убрать из избранного</string>
+    <string name="ds_make_private">Сделать личным</string>
+    <string name="ds_make_visible">Показать участникам</string>
+    <plurals name="ds_selected_count">
+        <item quantity="one">Выбрано: %d</item>
+        <item quantity="few">Выбрано: %d</item>
+        <item quantity="many">Выбрано: %d</item>
+        <item quantity="other">Выбрано: %d</item>
+    </plurals>
+    <string name="ds_status_ok">Работает</string>
+    <string name="ds_status_warning">Требует внимания</string>
+    <string name="ds_status_error">Ошибка</string>
+    <string name="ds_theme_system">Системная</string>
+    <string name="ds_theme_light">Светлая</string>
+    <string name="ds_theme_dark">Тёмная</string>
+    <string name="ds_theme_dark_only">Только тёмная</string>
+    <string name="ds_theme_sample_title">Доломиты, от приюта к приюту</string>
+    <string name="ds_theme_sample_text">12–19 июля · 8 дней</string>
+    <string name="ds_theme_sample_badge">Идёт</string>
+    <string name="ds_apply">Применить</string>
+    <string name="ds_filter_count">%1$s: %2$d</string>
+    <string name="ds_colour_default">По умолчанию</string>
+    <string name="ds_colour_custom">Свой цвет…</string>
+    <string name="ds_colour_custom_title">Свой цвет</string>
+    <string name="ds_colour_custom_field">Цвет</string>
+    <string name="ds_colour_custom_hint">В виде #rrggbb, например #ff8800</string>
+    <string name="ds_colour_custom_named">Свой цвет %1$s</string>
+    <string name="ds_colour_sample">А</string>
+    <string name="ds_icon_none">Без значка</string>
+    <string name="ds_icon_search">Поиск значков</string>
+    <string name="ds_icon_search_hint">Название, имя глифа или группа</string>
+    <string name="ds_nothing_found">Ничего не найдено</string>
+    <string name="ds_tree_expand">Развернуть %1$s</string>
+    <string name="ds_tree_collapse">Свернуть %1$s</string>
+    <string name="ds_find">Найти</string>
+    <string name="ds_replace_with">Заменить на</string>
+    <string name="ds_find_next">Следующее совпадение</string>
+    <string name="ds_find_previous">Предыдущее совпадение</string>
+    <string name="ds_replace">Заменить</string>
+    <string name="ds_replace_all">Заменить все</string>
+    <string name="ds_show_replace">Показать замену</string>
+    <string name="ds_hide_replace">Скрыть замену</string>
+    <string name="ds_match_case">Учитывать регистр</string>
+    <string name="ds_match_count">%1$d из %2$d</string>
+    <string name="ds_no_matches">Нет совпадений</string>
+    <string-array name="ds_tag_color_names">
+        <item>Красный</item>
+        <item>Оранжевый</item>
+        <item>Янтарный</item>
+        <item>Жёлтый</item>
+        <item>Лаймовый</item>
+        <item>Зелёный</item>
+        <item>Изумрудный</item>
+        <item>Сине-зелёный</item>
+        <item>Бирюзовый</item>
+        <item>Небесный</item>
+        <item>Синий</item>
+        <item>Индиго</item>
+        <item>Фиолетовый</item>
+        <item>Пурпурный</item>
+        <item>Фуксия</item>
+        <item>Розовый</item>
+        <item>Малиновый</item>
+        <item>Коричневый</item>
+        <item>Серый</item>
+        <item>Бордовый</item>
+        <item>Коралловый</item>
+        <item>Золотой</item>
+        <item>Бежевый</item>
+        <item>Оливковый</item>
+        <item>Мятный</item>
+        <item>Тёмно-синий</item>
+        <item>Лавандовый</item>
+        <item>Сланцевый</item>
+        <item>Графитовый</item>
+    </string-array>
+</resources>

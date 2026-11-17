@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="editor_copy">Копировать</string>
+    <string name="editor_plain_text">Обычный текст</string>
+    <string name="editor_code_title">Заголовок</string>
+    <string name="editor_size_units">Б КБ МБ ГБ</string>
+    <string name="editor_placeholder">Начните писать…</string>
+</resources>

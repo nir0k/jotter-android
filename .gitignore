@@ -1,0 +1,42 @@
+tmp/
+
+# Local agent state and instructions.
+.claude/
+CLAUDE.md
+AGENTS.md
+
+# Gradle and Android build output.
+.gradle/
+.kotlin/
+build/
+/local.properties
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# Release signing.
+signing/
+keystore.properties
+*.jks
+*.keystore
+
+# Logs.
+*.log
+
+# Editors and IDEs.
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.fleet/
+.zed/
+
+# Operating system files.
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+.directory
+.Trash-*

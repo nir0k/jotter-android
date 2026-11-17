@@ -1,0 +1,49 @@
+{
+  "format": 1,
+  "rules": [
+    {
+      "action": {
+        "collections": [
+          "01a1872b-b000-7000-8000-000000000001"
+        ],
+        "kind": "add"
+      },
+      "conditions": [
+        {
+          "field": "tag",
+          "op": "equals",
+          "value": "a"
+        }
+      ],
+      "created": "2026-10-01T10:00:00.000Z",
+      "enabled": true,
+      "id": "01a1872b-c000-7000-8000-000000000001",
+      "match": "all",
+      "name": "One",
+      "stop": false,
+      "updated": "2026-10-01T10:00:00.000Z"
+    },
+    {
+      "action": {
+        "collections": [
+          "01a1872b-b000-7000-8000-000000000001"
+        ],
+        "kind": "add"
+      },
+      "conditions": [
+        {
+          "field": "tag",
+          "op": "equals",
+          "value": "b"
+        }
+      ],
+      "created": "2026-10-01T10:00:00.000Z",
+      "enabled": true,
+      "id": "01a1872b-c000-7000-8000-000000000002",
+      "match": "all",
+      "name": "Two",
+      "stop": false,
+      "updated": "2026-10-01T10:00:00.000Z"
+    }
+  ]
+}

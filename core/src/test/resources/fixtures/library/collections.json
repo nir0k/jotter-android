@@ -1,0 +1,56 @@
+{
+  "collections": [
+    {
+      "color": "blue",
+      "created": "2026-10-20T08:01:00.000Z",
+      "icon": "Briefcase",
+      "id": "01a1872b-97aa-72e7-9231-751f29ec7df3",
+      "name": "Работа",
+      "parent": null,
+      "updated": "2026-10-21T09:30:15.125Z"
+    },
+    {
+      "color": null,
+      "created": "2026-10-20T08:01:00.000Z",
+      "icon": "Folder",
+      "id": "01a1872b-97ac-728a-b545-49f3cdfb242a",
+      "name": "Projects",
+      "parent": "01a1872b-97aa-72e7-9231-751f29ec7df3",
+      "updated": "2026-10-21T09:30:15.125Z"
+    },
+    {
+      "color": "#ff8800",
+      "created": "2026-10-20T08:01:00.000Z",
+      "futureField": {
+        "nested": [
+          1,
+          "two"
+        ]
+      },
+      "icon": "Code",
+      "id": "01a1872b-97ae-74ad-9b8d-049103f8499f",
+      "name": "Jotter",
+      "parent": "01a1872b-97ac-728a-b545-49f3cdfb242a",
+      "updated": "2026-10-21T09:30:15.125Z"
+    },
+    {
+      "color": "ultraviolet",
+      "created": "2026-10-20T08:01:00.000Z",
+      "icon": "Heart",
+      "id": "01a1872b-97b0-75b5-b225-91bfaaa4f96c",
+      "name": "Personal",
+      "parent": null,
+      "updated": "2026-10-21T09:30:15.125Z"
+    },
+    {
+      "color": null,
+      "created": "2026-10-20T08:01:00.000Z",
+      "icon": "Book",
+      "id": "01a1872b-97b2-71e7-80a2-4cd6e197e3e5",
+      "name": "Reading",
+      "parent": null,
+      "updated": "2026-10-21T09:30:15.125Z"
+    }
+  ],
+  "format": 1
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notes_empty_title">No notes</string>
+    <string name="notes_empty_text">The notes of the library appear here.</string>
+    <string name="library_open_failed">The library could not be opened.</string>
+    <string name="view_all">All notes</string>
+    <string name="view_unfiled">Unfiled notes</string>
+    <string name="view_favourites">Favourites</string>
+    <string name="unfiled_empty_title">No unfiled notes</string>
+    <string name="unfiled_empty_text">Notes that are not in a collection appear here.</string>
+    <string name="favourites_empty_title">No favourites</string>
+    <string name="favourites_empty_text">Notes marked as favourite appear here, in your order.</string>
+    <string name="archive_empty_title">The archive is empty</string>
+    <string name="archive_empty_text">Archived notes are kept here, out of the other lists.</string>
+    <string name="trash_title">Trash</string>
+    <string name="trash_empty_title">The trash is empty</string>
+    <plurals name="trash_empty_text">
+        <item quantity="one">Notes moved to the trash are deleted for good after %d day.</item>
+        <item quantity="other">Notes moved to the trash are deleted for good after %d days.</item>
+    </plurals>
+    <string name="trash_empty_kept">Notes moved to the trash stay there until it is emptied.</string>
+    <string name="collection_empty_title">No notes in this collection</string>
+    <string name="collection_empty_text">Notes of this collection and its subcollections appear here.</string>
+    <string name="tag_empty_title">No notes with this tag</string>
+    <string name="tag_empty_text">Notes with this tag or its child tags appear here.</string>
+    <string name="library_rebuilt">The index was rebuilt.</string>
+    <string name="library_rebuild_failed">The index could not be rebuilt.</string>
+    <string name="library_switch_failed">The library could not be opened.</string>
+    <string name="library_create_failed">The library could not be created.</string>
+    <string name="library_delete_failed">The library could not be deleted completely.</string>
+    <string name="retention_failed">The setting could not be saved.</string>
+    <string name="problems_copy_created">The normalised copy was created.</string>
+    <string name="problems_copy_failed">The normalised copy could not be created. The original file is unchanged.</string>
+    <string name="problems_deleted">The original was deleted.</string>
+    <string name="problems_delete_failed">The original could not be deleted.</string>
+    <string name="sync_banner_waiting">Waiting for another device to finish synchronising</string>
+    <plurals name="sync_conflicts">
+        <item quantity="one">Synchronisation kept %d conflict copy</item>
+        <item quantity="other">Synchronisation kept %d conflict copies</item>
+    </plurals>
+    <string name="sync_refreshed">Notes synchronised</string>
+    <string name="note_create_failed">The note could not be created.</string>
+    <string name="note_archived">Note archived</string>
+    <string name="note_trashed">Note moved to the trash</string>
+    <string name="note_deleted_permanently">Note deleted</string>
+    <string name="collection_own_notes">Only its own notes</string>
+    <!-- New notes from the app shortcut, the Quick Settings tile and the share sheet. -->
+    <string name="capture_title">New note</string>
+    <string name="capture_tile">New note</string>
+    <string name="capture_shortcut_short">New note</string>
+    <string name="capture_shortcut_long">New note</string>
+    <string name="capture_share_label">Jotter note</string>
+    <string name="capture_copying">Adding files… %1$d of %2$d</string>
+    <string name="capture_no_library_title">No library yet</string>
+    <string name="capture_no_library_text">Create a library in Jotter or download one from a sync storage first.</string>
+    <string name="capture_read_only_title">The library cannot take notes</string>
+    <string name="capture_read_only_text">It was written by a newer version of Jotter. Update the application to add notes.</string>
+    <string name="capture_open_jotter">Open Jotter</string>
+    <string name="capture_failed">The note could not be created.</string>
+    <string name="trash_empty_action">Empty trash</string>
+</resources>

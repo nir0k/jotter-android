@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notes_empty_title">Заметок нет</string>
+    <string name="notes_empty_text">Здесь появятся заметки библиотеки.</string>
+    <string name="library_open_failed">Не удалось открыть библиотеку.</string>
+    <string name="view_all">Все заметки</string>
+    <string name="view_unfiled">Без коллекции</string>
+    <string name="view_favourites">Избранное</string>
+    <string name="unfiled_empty_title">Заметок без коллекции нет</string>
+    <string name="unfiled_empty_text">Здесь появятся заметки, которые не добавлены в коллекцию.</string>
+    <string name="favourites_empty_title">Избранного нет</string>
+    <string name="favourites_empty_text">Здесь появятся заметки, отмеченные как избранные, в вашем порядке.</string>
+    <string name="archive_empty_title">Архив пуст</string>
+    <string name="archive_empty_text">Здесь хранятся заметки из архива, вне остальных списков.</string>
+    <string name="trash_title">Корзина</string>
+    <string name="trash_empty_title">Корзина пуста</string>
+    <plurals name="trash_empty_text">
+        <item quantity="one">Заметки из корзины удаляются навсегда через %d день.</item>
+        <item quantity="few">Заметки из корзины удаляются навсегда через %d дня.</item>
+        <item quantity="many">Заметки из корзины удаляются навсегда через %d дней.</item>
+        <item quantity="other">Заметки из корзины удаляются навсегда через %d дня.</item>
+    </plurals>
+    <string name="trash_empty_kept">Заметки остаются в корзине, пока её не очистят.</string>
+    <string name="collection_empty_title">В коллекции нет заметок</string>
+    <string name="collection_empty_text">Здесь появятся заметки этой коллекции и её подколлекций.</string>
+    <string name="tag_empty_title">Заметок с этим тегом нет</string>
+    <string name="tag_empty_text">Здесь появятся заметки с этим тегом или его дочерними тегами.</string>
+    <string name="library_rebuilt">Индекс пересобран.</string>
+    <string name="library_rebuild_failed">Не удалось пересобрать индекс.</string>
+    <string name="library_switch_failed">Не удалось открыть библиотеку.</string>
+    <string name="library_create_failed">Не удалось создать библиотеку.</string>
+    <string name="library_delete_failed">Не удалось полностью удалить библиотеку.</string>
+    <string name="retention_failed">Не удалось сохранить настройку.</string>
+    <string name="problems_copy_created">Нормализованная копия создана.</string>
+    <string name="problems_copy_failed">Не удалось создать нормализованную копию. Исходный файл не изменён.</string>
+    <string name="problems_deleted">Оригинал удалён.</string>
+    <string name="problems_delete_failed">Не удалось удалить оригинал.</string>
+    <string name="sync_banner_waiting">Ждём, пока другое устройство закончит синхронизацию</string>
+    <plurals name="sync_conflicts">
+        <item quantity="one">Синхронизация сохранила %d копию конфликта</item>
+        <item quantity="few">Синхронизация сохранила %d копии конфликтов</item>
+        <item quantity="many">Синхронизация сохранила %d копий конфликтов</item>
+        <item quantity="other">Синхронизация сохранила %d копии конфликтов</item>
+    </plurals>
+    <string name="sync_refreshed">Заметки синхронизированы</string>
+    <string name="note_create_failed">Не удалось создать заметку.</string>
+    <string name="note_archived">Заметка в архиве</string>
+    <string name="note_trashed">Заметка в корзине</string>
+    <string name="note_deleted_permanently">Заметка удалена</string>
+    <string name="collection_own_notes">Только свои заметки</string>
+    <!-- New notes from the app shortcut, the Quick Settings tile and the share sheet. -->
+    <string name="capture_title">Новая заметка</string>
+    <string name="capture_tile">Новая заметка</string>
+    <string name="capture_shortcut_short">Новая заметка</string>
+    <string name="capture_shortcut_long">Новая заметка</string>
+    <string name="capture_share_label">Заметка Jotter</string>
+    <string name="capture_copying">Добавляются файлы… %1$d из %2$d</string>
+    <string name="capture_no_library_title">Библиотеки ещё нет</string>
+    <string name="capture_no_library_text">Сначала создайте библиотеку в Jotter или скачайте её из хранилища синхронизации.</string>
+    <string name="capture_read_only_title">В библиотеку нельзя добавлять заметки</string>
+    <string name="capture_read_only_text">Её записала более новая версия Jotter. Обновите приложение, чтобы добавлять заметки.</string>
+    <string name="capture_open_jotter">Открыть Jotter</string>
+    <string name="capture_failed">Не удалось создать заметку.</string>
+    <string name="trash_empty_action">Очистить корзину</string>
+</resources>

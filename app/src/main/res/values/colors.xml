@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#EAF2FC</color>
+    <!-- The Warm palette's light primary colour, as the design system defines it. -->
+    <color name="ic_shortcut_glyph">#C2410C</color>
+</resources>

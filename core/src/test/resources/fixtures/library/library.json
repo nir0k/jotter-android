@@ -1,0 +1,43 @@
+{
+  "created": "2026-10-20T08:00:00.000Z",
+  "favorites": [
+    {
+      "id": "01a1872b-97aa-72e7-9231-751f29ec7df3",
+      "kind": "collection"
+    },
+    {
+      "id": "01a1872b-97ba-779d-8c12-8d4b1389c02e",
+      "kind": "note"
+    },
+    {
+      "id": "01a1872b-97ae-74ad-9b8d-049103f8499f",
+      "kind": "collection"
+    }
+  ],
+  "format": 1,
+  "futureField": {
+    "kept": [
+      1,
+      2.5,
+      true,
+      null
+    ]
+  },
+  "id": "01a1872b-97a8-7124-b419-0f874fddd48d",
+  "settings": {
+    "futureSetting": "kept",
+    "trashRetentionDays": 30
+  },
+  "tagColors": {
+    "reading list": "ultraviolet",
+    "work": "sky",
+    "work/urgent": "red",
+    "личное": "#00aa55"
+  },
+  "tombstones": [
+    {
+      "deleted": "2026-10-22T12:40:00.000Z",
+      "id": "01a1872b-97c9-710d-8b66-1fc462cde761"
+    }
+  ]
+}

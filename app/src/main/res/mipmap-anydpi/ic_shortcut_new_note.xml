@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The app shortcut New note: the glyph on the launcher icon's background, light or dark with the phone's theme. -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MonochromeLauncherIcon">
+    <background android:drawable="@color/ic_launcher_background" />
+    <foreground>
+        <inset android:drawable="@drawable/ic_shortcut_new_note_glyph" android:inset="33%" />
+    </foreground>
+</adaptive-icon>

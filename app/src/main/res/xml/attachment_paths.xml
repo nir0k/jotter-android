@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The files another application may be handed: the libraries, which hold the attachments, the
+     photo the camera application writes before it is stored in a note, and a
+     finished export offered for sharing. -->
+<paths>
+    <files-path name="libraries" path="libraries/" />
+    <cache-path name="camera" path="camera/" />
+    <cache-path name="export" path="export/" />
+</paths>

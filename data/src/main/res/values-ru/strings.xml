@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="note_untitled">Без названия</string>
+    <string name="archive_title">Архив</string>
+    <string name="sync_conflict_title">%1$s (конфликт, %2$s)</string>
+    <string name="channel_sync">Синхронизация</string>
+    <string name="channel_sync_problems">Проблемы синхронизации</string>
+    <string name="notification_syncing">Синхронизация заметок</string>
+    <string name="sync_progress">%1$d из %2$d</string>
+    <string name="notification_problem_title">Синхронизация остановлена</string>
+    <string name="notification_problem_sign_in">Сервер не принял вход. Откройте Jotter, чтобы ввести его заново.</string>
+    <string name="notification_problem_host_key">Ключ сервера неизвестен. Откройте Jotter, чтобы сравнить его и подтвердить доверие.</string>
+    <string name="notification_problem_host_key_changed">Ключ сервера изменился. Откройте Jotter, чтобы сравнить отпечатки.</string>
+    <!-- The generated table of contents, index.html (desktop spec section 3.6). -->
+    <string name="contents_title">Библиотека Jotter</string>
+    <string name="contents_without_collection">Заметки без коллекции</string>
+    <string name="contents_empty">В библиотеке пока нет заметок.</string>
+</resources>

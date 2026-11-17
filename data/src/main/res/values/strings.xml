@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="note_untitled">Untitled</string>
+    <string name="archive_title">Archive</string>
+    <string name="sync_conflict_title">%1$s (conflict, %2$s)</string>
+    <string name="channel_sync">Synchronisation</string>
+    <string name="channel_sync_problems">Sync problems</string>
+    <string name="notification_syncing">Synchronising notes</string>
+    <string name="sync_progress">%1$d of %2$d</string>
+    <string name="notification_problem_title">Synchronisation stopped</string>
+    <string name="notification_problem_sign_in">The server refused the sign-in. Open Jotter to enter it again.</string>
+    <string name="notification_problem_host_key">The server\'s key is unknown. Open Jotter to compare and trust it.</string>
+    <string name="notification_problem_host_key_changed">The server\'s key has changed. Open Jotter to compare the fingerprints.</string>
+    <!-- The generated table of contents, index.html (desktop spec section 3.6). -->
+    <string name="contents_title">Jotter library</string>
+    <string name="contents_without_collection">Notes without a collection</string>
+    <string name="contents_empty">This library has no notes yet.</string>
+</resources>
