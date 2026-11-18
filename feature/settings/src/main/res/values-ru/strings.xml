@@ -51,6 +51,8 @@
     <string name="settings_about">О приложении</string>
     <string name="about_version">Версия</string>
     <string name="about_licenses">Лицензии</string>
+    <string name="about_privacy_policy">Политика конфиденциальности</string>
+    <string name="about_no_browser">На телефоне нет браузера, чтобы открыть ссылку.</string>
     <string name="first_start_download">Скачать с SFTP</string>
     <string name="library_local_only">Эта библиотека есть только на этом телефоне. Подключите хранилище синхронизации, чтобы у неё была вторая копия и она была на ваших компьютерах.</string>
     <string name="settings_sync">Синхронизация</string>
