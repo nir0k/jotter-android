@@ -18,6 +18,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -76,6 +78,8 @@ fun SearchButton(onClick: () -> Unit) = IconAction(
  * @param onOpen Opens a note.
  * @param onDismiss Closes the window.
  * @param initialFiltersShown Whether the filters start open.
+ * @param snackbar The list's messages, shown at the bottom of the window while it is open: the
+ *     window covers the list, whose own snackbar would lie under its scrim, out of reach.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -88,6 +92,7 @@ fun SearchWindow(
     onOpen: (String) -> Unit,
     onDismiss: () -> Unit,
     initialFiltersShown: Boolean = false,
+    snackbar: SnackbarHostState? = null,
 ) {
     var filtersShown by rememberSaveable { mutableStateOf(initialFiltersShown) }
     val focus = remember { FocusRequester() }
@@ -133,6 +138,7 @@ fun SearchWindow(
                     }
                 }
             }
+            snackbar?.let { SnackbarHost(it, Modifier.align(Alignment.BottomCenter).safeDrawingPadding()) }
         }
     }
 }

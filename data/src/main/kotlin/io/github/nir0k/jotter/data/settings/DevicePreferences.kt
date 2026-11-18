@@ -201,13 +201,14 @@ class DevicePreferences(private val store: DataStore<Preferences>) {
     }
 
     /**
-     * Whether the application should ask for the notification permission when it opens next: it
-     * has not asked yet, or a background run failed in a way the person must fix and could not say
-     * so.
+     * Whether the application should ask for the notification permission while it is open: a sync
+     * storage has just been connected, whose background runs report problems in a notification, or
+     * a background run failed in a way the person must fix and could not say so. A new installation
+     * does not ask until then.
      */
-    val askNotifications: Flow<Boolean> = store.data.map { it[AskNotificationsKey] ?: true }
+    val askNotifications: Flow<Boolean> = store.data.map { it[AskNotificationsKey] ?: false }
 
-    /** Stores whether to ask for the notification permission when the application opens. */
+    /** Stores whether to ask for the notification permission while the application is open. */
     suspend fun setAskNotifications(ask: Boolean) {
         store.edit { it[AskNotificationsKey] = ask }
     }

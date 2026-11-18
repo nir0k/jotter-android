@@ -9,7 +9,10 @@ import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
@@ -230,12 +233,21 @@ private fun drawCode(
         drawRoundRect(rgb(colors.edge), Offset(0f, top), box, CornerRadius(fontPx * 0.4f), style = Stroke(1f * density))
         drawText(header, topLeft = Offset(padding, top + padding / 2))
         drawText(body, topLeft = Offset(gutter, top + headerHeight))
+        // Line numbers are drawn as outlines, not text, so text copied from a PDF is the code alone.
+        val numbers = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+            typeface = android.graphics.Typeface.MONOSPACE
+            textSize = fontPx * 0.9f
+            color = rgb(colors.muted).toArgb()
+        }
+        val outline = android.graphics.Path()
         var offset = 0
         var number = 1
         while (true) {
             val line = body.getLineForOffset(offset)
-            val label = measurer.measure(number.toString(), codeStyle.copy(color = rgb(colors.muted)))
-            drawText(label, topLeft = Offset(gutter - padding - label.size.width, top + headerHeight + body.getLineBaseline(line) - label.firstBaseline))
+            val label = number.toString()
+            val baseline = top + headerHeight + body.getLineBaseline(line)
+            numbers.getTextPath(label, 0, label.length, gutter - padding - numbers.measureText(label), baseline, outline)
+            drawIntoCanvas { it.nativeCanvas.drawPath(outline, numbers) }
             val next = code.text.indexOf('\n', offset)
             if (next < 0) break
             offset = next + 1

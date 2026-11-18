@@ -29,7 +29,7 @@ Photos are taken with the system camera and files are chosen with the system's p
 
 ## Notifications
 
-Notifications report synchronisation problems. They are created on the phone and sent nowhere.
+Notifications report synchronisation problems. Jotter asks for the notification permission only when you connect a sync storage. Notifications are created on the phone and sent nowhere.
 
 ## Exports
 

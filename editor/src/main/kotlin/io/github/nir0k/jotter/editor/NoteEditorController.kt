@@ -99,6 +99,7 @@ import io.github.nir0k.jotter.core.body.setLink
 import io.github.nir0k.jotter.core.body.setNumbering
 import io.github.nir0k.jotter.core.body.setTableWidth
 import io.github.nir0k.jotter.core.body.startNumbering
+import io.github.nir0k.jotter.core.body.startOf
 import io.github.nir0k.jotter.core.body.tableAction
 import io.github.nir0k.jotter.core.body.tableById
 import io.github.nir0k.jotter.core.body.textRange
@@ -233,6 +234,19 @@ class NoteEditorController(
     fun focusEnd(): Boolean {
         if (!editable) return false
         select(endOf(state.doc.items.last()))
+        focusRequest = fieldOf(state.selection)
+        return true
+    }
+
+    /**
+     * Puts the cursor at the start of the note and gives its field the focus, for the keyboard's
+     * Next in the title.
+     *
+     * @return Whether the cursor was placed; false in a note that cannot be edited.
+     */
+    fun focusStart(): Boolean {
+        if (!editable) return false
+        select(startOf(state.doc))
         focusRequest = fieldOf(state.selection)
         return true
     }

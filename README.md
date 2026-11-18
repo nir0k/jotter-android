@@ -29,7 +29,7 @@ Jotter for Android needs Android 16 or newer. It uses no Google Play services.
 
 - The library lives in the application's private storage and leaves the phone only through synchronisation with the SFTP server you choose. Jotter has no account, no analytics and no other network connections.
 - Passwords, private keys and passphrases are encrypted with a key of the Android Keystore. The application's data is excluded from Android's cloud backup and device-to-device transfer: the sync storage is the second copy of a library.
-- Permissions: Internet for synchronisation; notifications for sync problems found in the background; location only when you switch on geotags for new notes; a foreground service for long sync runs. Photos come through the system camera and files through the system's pickers, so there is no camera or storage permission.
+- Permissions: Internet for synchronisation; notifications for sync problems found in the background, asked when you connect a sync storage; location only when you switch on geotags for new notes; a foreground service for long sync runs. Photos come through the system camera and files through the system's pickers, so there is no camera or storage permission.
 
 ## Library format
 

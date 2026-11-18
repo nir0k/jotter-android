@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,6 +40,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -86,10 +89,18 @@ class NoteDetails(
  * @param titleFocus Focuses the title of a new note.
  * @param onBack Closes the screen; null in the detail pane of a wide window.
  * @param menu The note's ⋮ entries.
+ * @param onTitleDone Moves on from the title, for the keyboard's Next and Enter: to the body.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteTopBar(title: String?, onTitle: ((String) -> Unit)?, titleFocus: FocusRequester, onBack: (() -> Unit)?, menu: List<MenuAction>) {
+fun NoteTopBar(
+    title: String?,
+    onTitle: ((String) -> Unit)?,
+    titleFocus: FocusRequester,
+    onBack: (() -> Unit)?,
+    menu: List<MenuAction>,
+    onTitleDone: () -> Unit = {},
+) {
     TopAppBar(
         expandedHeight = Dimens.TouchTarget,
         windowInsets = TopAppBarDefaults.windowInsets.union(WindowInsets.displayCutout.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)),
@@ -100,7 +111,7 @@ fun NoteTopBar(title: String?, onTitle: ((String) -> Unit)?, titleFocus: FocusRe
                 }
             }
         },
-        title = { if (title != null) NoteTitle(title, onTitle, titleFocus) },
+        title = { if (title != null) NoteTitle(title, onTitle, titleFocus, onTitleDone) },
         actions = { if (menu.isNotEmpty()) OverflowMenuButton(menu, tint = MaterialTheme.colorScheme.onSurface) },
     )
 }
@@ -125,9 +136,12 @@ fun NoteDetailsBar(details: NoteDetails, withBack: Boolean, modifier: Modifier =
     }
 }
 
-/** The title as a field of the top bar's text style without a frame, or as text when it cannot be edited; an empty one reads Untitled. */
+/**
+ * The title as a field of the top bar's text style without a frame, or as text when it cannot be
+ * edited; an empty one reads Untitled. The keyboard's Next, and Enter, call [onDone].
+ */
 @Composable
-private fun NoteTitle(title: String, onTitle: ((String) -> Unit)?, titleFocus: FocusRequester) {
+private fun NoteTitle(title: String, onTitle: ((String) -> Unit)?, titleFocus: FocusRequester, onDone: () -> Unit) {
     val untitled = stringResource(DataR.string.note_untitled)
     if (onTitle == null) {
         Text(title.ifEmpty { untitled }, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -139,6 +153,8 @@ private fun NoteTitle(title: String, onTitle: ((String) -> Unit)?, titleFocus: F
         title,
         onTitle,
         singleLine = true,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        keyboardActions = KeyboardActions(onNext = { onDone() }),
         textStyle = style.copy(color = MaterialTheme.colorScheme.onSurface),
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         modifier = Modifier.fillMaxWidth().focusRequester(titleFocus).semantics { contentDescription = label },
