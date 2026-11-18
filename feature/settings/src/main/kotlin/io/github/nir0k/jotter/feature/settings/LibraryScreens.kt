@@ -1,5 +1,6 @@
 package io.github.nir0k.jotter.feature.settings
 
+import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,11 +26,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.core.net.toUri
 import io.github.nir0k.jotter.core.format.ErrorCode
 import io.github.nir0k.jotter.core.format.UnsupportedBody
 import io.github.nir0k.jotter.core.index.Problem
 import io.github.nir0k.jotter.data.library.LibraryEntry
 import io.github.nir0k.jotter.ui.SectionScreen
+import io.github.nir0k.jotter.ui.startActivity
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -182,8 +185,12 @@ val Components = listOf(
     Component(R.string.component_ksyntaxhighlighting, R.string.license_ksyntaxhighlighting, "KSyntaxHighlighting.txt"),
 )
 
+/** Where the privacy policy is published; Google Play requires a link to it inside the application. */
+private const val PrivacyPolicyUrl = "https://github.com/nir0k/jotter-android/blob/main/PRIVACY.md"
+
 /**
- * AboutScreen shows the application's version and opens the licences of its components.
+ * AboutScreen shows the application's version, opens the licences of its components and opens the
+ * privacy policy in the browser; without a browser it says so in a snackbar.
  *
  * @param version The application's version.
  * @param onOpenLicenses Opens the licences.
@@ -191,11 +198,24 @@ val Components = listOf(
  */
 @Composable
 fun AboutScreen(version: String, onOpenLicenses: () -> Unit, onBack: () -> Unit) {
-    SectionScreen(stringResource(R.string.settings_about), onBack) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val snackbar = remember { SnackbarHostState() }
+    val noBrowser = stringResource(R.string.about_no_browser)
+    SectionScreen(stringResource(R.string.settings_about), onBack, snackbar = snackbar) {
         item {
             SettingsSection(null) {
                 ValueRow(stringResource(R.string.about_version), version)
                 NavigationRow(stringResource(R.string.about_licenses), onOpenLicenses, icon = AppIcons.Document)
+                NavigationRow(
+                    stringResource(R.string.about_privacy_policy),
+                    {
+                        if (!startActivity(context, Intent(Intent.ACTION_VIEW, PrivacyPolicyUrl.toUri()))) {
+                            scope.launch { snackbar.showSnackbar(noBrowser) }
+                        }
+                    },
+                    icon = AppIcons.Lock,
+                )
             }
         }
     }
