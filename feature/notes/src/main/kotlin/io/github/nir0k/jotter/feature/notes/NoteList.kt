@@ -462,15 +462,16 @@ fun NoteListScreen(
     leading: List<LeadingRow> = emptyList(),
     reorder: Reorder? = null,
 ) {
+    val add: (@Composable () -> Unit)? = onAdd?.takeIf { selection?.active != true }?.let { { AddButton(stringResource(R.string.note_new), it) } }
     Scaffold(
         snackbarHost = { snackbar?.let { SnackbarHost(it) } },
-        floatingActionButton = { if (selection?.active != true) onAdd?.let { AddButton(stringResource(R.string.note_new), it) } },
+        floatingActionButton = { if (detail == null) add?.invoke() },
         bottomBar = { if (selection?.active == true) selection.bar() },
         topBar = { AppTopBar(title, onBack = onBack, menu = menu, actions = { SearchButton(onSearch) }) },
     ) { padding ->
         Column(Modifier.padding(padding).consumeWindowInsets(padding).fillMaxSize()) {
             banner?.let { SyncBannerStrip(it) }
-            ListAndDetail(Modifier, detail) {
+            ListAndDetail(Modifier, detail, add) {
                 NoteListBody(load, sort, onSort, tagColors, empty, onRetry, onOpen, controls = controls, leading = leading, refresh = refresh, selection = selection, reorder = reorder)
             }
         }
@@ -479,19 +480,24 @@ fun NoteListScreen(
 
 /**
  * ListAndDetail lays a list out alone or, in a wide window with a note open, beside the note, as
- * the desktop's panes.
+ * the desktop's panes. Beside a note the list's add button stands in the list's pane, so it does
+ * not cover the note; alone, the screen's scaffold places it.
  *
  * @param detail The open note, or null for the list alone.
+ * @param add The list's add button, drawn in the list's pane while a note is open; null without one.
  * @param list The list.
  */
 @Composable
-fun ListAndDetail(modifier: Modifier, detail: (@Composable () -> Unit)?, list: @Composable () -> Unit) {
+fun ListAndDetail(modifier: Modifier, detail: (@Composable () -> Unit)?, add: (@Composable () -> Unit)? = null, list: @Composable () -> Unit) {
     if (detail == null) {
         Column(modifier.fillMaxSize()) { list() }
         return
     }
     Row(modifier.fillMaxSize()) {
-        Column(Modifier.weight(Dimens.ListDetailListShare).fillMaxHeight()) { list() }
+        Box(Modifier.weight(Dimens.ListDetailListShare).fillMaxHeight()) {
+            Column(Modifier.fillMaxSize()) { list() }
+            add?.let { Box(Modifier.align(Alignment.BottomEnd).padding(Dimens.ScreenPadding)) { it() } }
+        }
         VerticalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         Column(Modifier.weight(1 - Dimens.ListDetailListShare).fillMaxHeight()) { detail() }
     }

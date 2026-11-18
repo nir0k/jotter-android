@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.nir0k.jotter.designsystem.R
 import io.github.nir0k.jotter.designsystem.icons.AppIcons
@@ -77,7 +78,9 @@ fun SearchField(
 
 /**
  * FilterButton is one filter or sort control of a [FilterBar]: a chip that shows the current
- * value, is highlighted while it narrows the list, and opens a choice dialog.
+ * value, is highlighted while it narrows the list, and opens a choice dialog. The label keeps to
+ * one line, ending in an ellipsis when it does not fit, so a large font does not make the chip
+ * grow out of its row.
  *
  * @param label Localized filter name or "Name: value".
  * @param active Whether the filter differs from its default.
@@ -88,7 +91,7 @@ fun FilterButton(label: String, active: Boolean, onClick: () -> Unit, modifier: 
     FilterChip(
         selected = active,
         onClick = onClick,
-        label = { Text(label) },
+        label = { Text(label, maxLines = 1, overflow = TextOverflow.Ellipsis) },
         trailingIcon = { Icon(AppIcons.ChevronDown, null, modifier = Modifier.size(Dimens.IconMetric)) },
         modifier = modifier,
     )

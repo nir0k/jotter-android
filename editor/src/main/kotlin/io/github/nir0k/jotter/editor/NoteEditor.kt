@@ -11,6 +11,7 @@ import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -89,8 +90,8 @@ private fun rememberGlyphs(): (String) -> Painter {
  * blocks and tables between them, in one scrolling column. The note's own formatting draws the
  * body; the controls of code blocks and tables follow the design system. While an image or a
  * chip is dragged near the top or the bottom edge, the column scrolls. The column fills at
- * least the window, and a tap on the room below the text puts the cursor at the end of the
- * note.
+ * least the window, and a tap on the room below the text, the bottom padding included, puts the
+ * cursor at the end of the note.
  *
  * @param images Decodes the note's images.
  * @param languageName Returns the name a stored code language is shown with.
@@ -169,8 +170,19 @@ fun NoteEditor(
             }
             val doc = controller.state.doc
             val runs = doc.runsIn(RootContainer).associateBy { it.start }
-            val fill = if (constraints.hasBoundedHeight) maxHeight - contentPadding.calculateTopPadding() - contentPadding.calculateBottomPadding() else 0.dp
-            Column(Modifier.fillMaxWidth().verticalScroll(scrollState).padding(contentPadding).heightIn(min = fill)) {
+            val bottom = contentPadding.calculateBottomPadding()
+            val fill = if (constraints.hasBoundedHeight) maxHeight - contentPadding.calculateTopPadding() else 0.dp
+            // The room below the text, the bottom padding included, takes a tap as one at the end of the
+            // note; the field there may keep the focus with the keyboard hidden, so the keyboard is shown again.
+            val tapAtEnd = Modifier.fillMaxWidth().pointerInput(controller, keyboard) {
+                detectTapGestures { if (controller.focusEnd()) keyboard?.show() }
+            }
+            val sides = PaddingValues(
+                start = contentPadding.calculateStartPadding(direction),
+                top = contentPadding.calculateTopPadding(),
+                end = contentPadding.calculateEndPadding(direction),
+            )
+            Column(Modifier.fillMaxWidth().verticalScroll(scrollState).padding(sides).heightIn(min = fill)) {
                 for ((index, item) in doc.items.withIndex()) {
                     when (item) {
                         is Block -> runs[index]?.let { run ->
@@ -182,13 +194,8 @@ fun NoteEditor(
                         is Table -> key(item.id) { TableView(controller, item, colors, textStyle, metricsFor, decorations) }
                     }
                 }
-                // The room below the text takes a tap as one at the end of the note; the field there may keep
-                // the focus with the keyboard hidden, so the keyboard is shown again.
-                Spacer(
-                    Modifier.fillMaxWidth().weight(1f).pointerInput(controller, keyboard) {
-                        detectTapGestures { if (controller.focusEnd()) keyboard?.show() }
-                    },
-                )
+                Spacer(tapAtEnd.weight(1f))
+                Spacer(tapAtEnd.height(bottom))
             }
         }
     }

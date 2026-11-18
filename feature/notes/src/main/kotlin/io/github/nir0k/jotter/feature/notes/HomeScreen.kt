@@ -122,6 +122,7 @@ fun HomeScreen(
     var tagsShown by rememberSaveable { mutableStateOf(initialTagsShown) }
     var expandedCollections by rememberSaveable(stateSaver = ExpandedSaver) { mutableStateOf(initialExpanded) }
     var expandedTags by rememberSaveable(stateSaver = ExpandedSaver) { mutableStateOf(initialExpanded) }
+    val add: (@Composable () -> Unit)? = onAdd?.let { { AddButton(stringResource(R.string.note_new), it) } }
     Scaffold(
         topBar = {
             AppTopBar(
@@ -132,13 +133,13 @@ fun HomeScreen(
                 },
             )
         },
-        floatingActionButton = { onAdd?.let { AddButton(stringResource(R.string.note_new), it) } },
+        floatingActionButton = { if (detail == null) add?.invoke() },
         snackbarHost = { snackbar?.let { SnackbarHost(it) } },
     ) { padding ->
         Column(Modifier.padding(padding).consumeWindowInsets(padding).fillMaxSize()) {
             if (readOnly) StatusBanner(text = stringResource(UiR.string.library_read_only), icon = AppIcons.Lock)
             banner?.let { SyncBannerStrip(it) }
-            ListAndDetail(Modifier, detail) {
+            ListAndDetail(Modifier, detail, add) {
                 val rows: @Composable () -> Unit = {
                     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = AddButtonClearance)) {
                         items(destinations, key = { "list:${it.label}" }) { DestinationRow(it) }

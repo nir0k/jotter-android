@@ -391,7 +391,8 @@ private fun Destinations(
                 detail = detail,
                 banner = banner,
                 refresh = refresh,
-                snackbar = listSnackbar,
+                // While the search window covers the screen, it shows the messages.
+                snackbar = listSnackbar.takeIf { !searching || paneNote != null },
                 onAdd = { createNote(emptyList(), emptyList()) }.takeIf { canCreate },
             )
             // Covered by the note it opened; Back from the note returns to the results.
@@ -399,7 +400,7 @@ private fun Destinations(
                 ListSearchWindow(
                     open, NoteFilter(), sort,
                     ListSearch(search, { search = it }, SearchOptions(collectionChoices, tagChoices, offerEverywhere = false, offerArchived = true)),
-                    lists.collections, tagColors, openNote,
+                    lists.collections, tagColors, openNote, listSnackbar,
                 ) { searching = false }
             }
         }
@@ -482,7 +483,8 @@ private fun Destinations(
                 detail = detail,
                 refresh = refresh,
                 banner = banner,
-                snackbar = listSnackbar,
+                // While the search window covers the screen, it shows the messages.
+                snackbar = listSnackbar.takeIf { !searching || paneNote != null },
                 onAdd = {
                     when (screen) {
                         Screen.Collection -> createNote(listOf(route.arg), emptyList())
@@ -522,7 +524,7 @@ private fun Destinations(
                         search, { search = it },
                         SearchOptions(collectionChoices, tagChoices, offerEverywhere = screen != Screen.AllNotes && !isArchive && !isTrash, offerArchived = !isArchive && !isTrash),
                     ),
-                    lists.collections, tagColors, openNote,
+                    lists.collections, tagColors, openNote, listSnackbar,
                 ) { searching = false }
             }
         }
@@ -708,8 +710,9 @@ private fun rememberPullRefresh(sync: SyncManager, snackbar: SnackbarHostState):
 }
 
 /**
- * Asks for the notification permission when [DevicePreferences.askNotifications] says so: at the
- * first start, and on the next start after a background run could not report a problem.
+ * Asks for the notification permission when [DevicePreferences.askNotifications] says so: once a
+ * sync storage is connected or a library downloaded, and on the next start after a background run
+ * could not report a problem.
  */
 @Composable
 private fun NotificationPermission(preferences: DevicePreferences) {
@@ -776,6 +779,7 @@ private fun rememberLibraryFacts(open: LibraryState.Open, session: LibrarySessio
  * @param search The list's search.
  * @param collections The collection tree, for collection names and the collection filter.
  * @param onOpen Opens a note.
+ * @param snackbar The list's messages, which the window shows while it covers the list.
  * @param onDismiss Closes the window.
  */
 @Composable
@@ -787,10 +791,11 @@ private fun ListSearchWindow(
     collections: List<Collection>,
     tagColors: Map<String, String>,
     onOpen: (String) -> Unit,
+    snackbar: SnackbarHostState,
     onDismiss: () -> Unit,
 ) {
     val query = if (search.search.isActive) rememberNotes(open, filter, sort, search.search, collections) else null
-    SearchWindow(search, query?.load, sort, tagColors, query?.retry ?: {}, onOpen, onDismiss)
+    SearchWindow(search, query?.load, sort, tagColors, query?.retry ?: {}, onOpen, onDismiss, snackbar = snackbar)
 }
 
 /** Lists the nodes of a collection tree depth first. */

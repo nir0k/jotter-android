@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.OutputTransformation
 import androidx.compose.material3.MaterialTheme
@@ -41,6 +42,7 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,6 +59,9 @@ import io.github.nir0k.jotter.designsystem.theme.Shapes
 
 /** The width of the column of line numbers, in multiples of the code's size. */
 private const val GutterWidth = 2.5f
+
+/** The keyboard of code: no capitals at the start of lines and no corrections. */
+private val CodeKeyboard = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false)
 
 /**
  * A code block: a header with the language, the title and Copy above the code, which is edited as
@@ -183,6 +188,8 @@ internal fun CodeBlockView(
             textStyle = codeStyle,
             inputTransformation = input,
             outputTransformation = output,
+            // Code is not prose: the keyboard neither capitalises lines nor corrects identifiers.
+            keyboardOptions = CodeKeyboard,
             onTextLayout = { result -> layout = result() },
             cursorBrush = SolidColor(rgb(colors.primary)),
         )

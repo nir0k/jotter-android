@@ -538,7 +538,8 @@ class SyncManager(
     /**
      * Checks a connection for the open library and saves it: connect, verify the host key, sign in,
      * write and remove a probe file, and check that the folder holds this library or nothing
-     * (desktop spec section 12.6). A failure saves nothing.
+     * (desktop spec section 12.6). A failure saves nothing; success also has the application ask for
+     * the notification permission ([DevicePreferences.askNotifications]).
      *
      * @param settings The connection with the preferences to keep.
      * @param secret The password or the key; null keeps the stored key.
@@ -563,13 +564,16 @@ class SyncManager(
         draftKey = null
         waitsForPerson = false
         SyncNotifications.cancelProblem(context)
+        // Background runs of the new connection report problems in a notification, so it is asked for now.
+        preferences.setAskNotifications(true)
         state.update { it.copy(phase = SyncPhase.Idle, error = null, hostKey = null) }
         request(full = true)
     }
 
     /**
      * Downloads the library a remote folder holds into this device and opens it, already
-     * connected. The connection is checked as by [connect] first.
+     * connected. The connection is checked as by [connect] first, and success has the application
+     * ask for the notification permission as [connect] does.
      *
      * @throws FormatException With the code of the step that failed: NotFound when the folder holds
      *   no library, NotEmpty when its library is already on this device.
@@ -621,6 +625,8 @@ class SyncManager(
             }
         }
         draftKey = null
+        // The downloaded library is connected, and its background runs report problems in a notification.
+        preferences.setAskNotifications(true)
     }
 
     /**

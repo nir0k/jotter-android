@@ -34,8 +34,6 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.luminance
@@ -58,7 +56,6 @@ import io.github.nir0k.jotter.editor.CodeExtensions
 import io.github.nir0k.jotter.editor.CodeLanguages
 import io.github.nir0k.jotter.editor.CodeRef
 import io.github.nir0k.jotter.editor.EditorHost
-import io.github.nir0k.jotter.editor.EditorSelection
 import io.github.nir0k.jotter.editor.EditorStrings
 import io.github.nir0k.jotter.editor.NoteAssets
 import io.github.nir0k.jotter.editor.NoteColors
@@ -67,7 +64,6 @@ import io.github.nir0k.jotter.editor.NoteEditorController
 import io.github.nir0k.jotter.editor.NoteImages
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.graphics.Color
@@ -137,6 +133,7 @@ import androidx.core.net.toUri
  * @param menu The note's ⋮ entries.
  * @param onTitle Receives the edited title; null for a note that cannot be edited.
  * @param titleFocus Focuses the title of a new note.
+ * @param onTitleDone Moves on from the title to the body, for the keyboard's Next.
  * @param details The line of collections and tags over the top of the body, or null to hide it.
  * @param bodyScroll How far the body has scrolled, in pixels, which that line follows.
  * @param header What stands above the body.
@@ -152,6 +149,7 @@ fun NoteScreen(
     menu: List<MenuAction> = emptyList(),
     onTitle: ((String) -> Unit)? = null,
     titleFocus: FocusRequester = remember { FocusRequester() },
+    onTitleDone: () -> Unit = {},
     details: NoteDetails? = null,
     bodyScroll: () -> Int = { 0 },
     header: @Composable ColumnScope.() -> Unit = {},
@@ -159,7 +157,7 @@ fun NoteScreen(
     body: @Composable (Modifier) -> Unit,
 ) {
     Scaffold(
-        topBar = { NoteTopBar(title, onTitle, titleFocus, onBack, menu) },
+        topBar = { NoteTopBar(title, onTitle, titleFocus, onBack, menu, onTitleDone) },
         snackbarHost = { SnackbarHost(snackbar) },
     ) { padding ->
         // The formatting bar rides on the keyboard; the body shrinks above both.
@@ -208,16 +206,10 @@ fun noteColors(monokai: Boolean): NoteColors {
 enum class NoteOutcome { Archived, Trashed, Deleted }
 
 /** The dialogs of the note's menu. */
-private enum class NoteDialog { Icon, Color, Collections, Tags, Export, Delete }
+internal enum class NoteDialog { Icon, Color, Collections, Tags, Export, Delete }
 
 /** The most notes the note picker lists. */
 private const val PickerLimit = 30
-
-/** Keeps the editor's selection in the saved state as its anchor and head. */
-private val SelectionSaver = Saver<EditorSelection?, IntArray>(
-    save = { selection -> selection?.let { intArrayOf(it.anchor, it.head) } },
-    restore = { EditorSelection(it[0], it[1]) },
-)
 
 /** Tells whether the activity showing a context is being recreated, as on rotation. */
 private fun Context.isChangingConfigurations(): Boolean {
@@ -293,25 +285,23 @@ fun NoteDetail(
         onDispose { if (leave?.editing === editing) leave.editing = null }
     }
     val openNote by rememberUpdatedState(onOpenNote)
-    var find by rememberSaveable(id) { mutableStateOf(false) }
-    var findQuery by rememberSaveable(id) { mutableStateOf("") }
+    val screenState = rememberNoteScreenState(id)
+    var find by screenState::find
+    var findQuery by screenState::findQuery
     var found by remember(editing) { mutableStateOf(0 to -1) }
     var link by remember(editing) { mutableStateOf<Pair<String, String>?>(null) }
     var languageFor by remember(editing) { mutableStateOf<CodeRef?>(null) }
     var titleFor by remember(editing) { mutableStateOf<CodeRef?>(null) }
     var viewer by remember(editing) { mutableStateOf<Pair<List<String>, Int>?>(null) }
     var picker by remember(editing) { mutableStateOf<PickerTarget?>(null) }
-    var info by rememberSaveable(id) { mutableStateOf(false) }
-    var dialog by rememberSaveable(id) { mutableStateOf<NoteDialog?>(null) }
-    // The camera's photo and the file being saved outlive the activity, which the system may
-    // recreate while the other application is in front.
-    var cameraPath by rememberSaveable(id) { mutableStateOf<String?>(null) }
-    var savingFile by rememberSaveable(id) { mutableStateOf<String?>(null) }
+    var info by screenState::info
+    var dialog by screenState::dialog
+    var cameraPath by screenState::cameraPath
+    var savingFile by screenState::savingFile
     val assets = remember(open.library, id) { NoteAssets(open.library.root.toFile(), id) }
-    // The cursor and the body's focus outlive the editor, which a rotation creates anew.
-    var selection by rememberSaveable(id, stateSaver = SelectionSaver) { mutableStateOf<EditorSelection?>(null) }
-    var bodyFocused by rememberSaveable(id) { mutableStateOf(false) }
-    val scroll = rememberScrollState()
+    var selection by screenState::selection
+    var bodyFocused by screenState::bodyFocused
+    val scroll = screenState.scroll
     val titleFocus = remember(editing) { FocusRequester() }
     val colors = noteColors(monokai)
     val strings = remember(resources) { EditorStrings.from(context) }
@@ -585,6 +575,7 @@ fun NoteDetail(
         menu = menu,
         onTitle = editing::changeTitle.takeIf { editable },
         titleFocus = titleFocus,
+        onTitleDone = { controller?.focusStart() },
         bodyScroll = { scroll.value },
         details = note?.let {
             NoteDetails(

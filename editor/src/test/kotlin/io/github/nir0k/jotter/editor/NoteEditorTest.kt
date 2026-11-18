@@ -2,11 +2,16 @@ package io.github.nir0k.jotter.editor
 
 import android.app.Application
 import android.widget.Magnifier
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextInputSelection
@@ -20,9 +25,15 @@ import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.style.TextIndent
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import io.github.nir0k.jotter.core.body.Block
+import io.github.nir0k.jotter.core.body.Point
+import io.github.nir0k.jotter.core.body.TextSelection
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -167,7 +178,50 @@ class NoteEditorTest {
         assertEquals(TextIndent(20.sp, 20.sp), result[2].item.textIndent)
         assertEquals(TextIndent(0.sp, 0.sp), result[3].item.textIndent)
     }
+
+    /**
+     * A tap in the room below a short note, down in the bottom padding that keeps the text clear of
+     * what the screen draws over it, puts the cursor at the end of the note and focuses it.
+     */
+    @Test
+    fun tapInTheBottomPaddingFocusesTheEnd() {
+        val controller = NoteEditorController("01a1872b-97c3-75de-bada-1e2d73552a21", "<p>ab</p>", editable = true, { it })
+        compose.setContent {
+            Box(Modifier.size(360.dp, 640.dp)) {
+                NoteEditor(
+                    controller, colors, EditorStrings.from(LocalContext.current), NoteImages(null, rememberCoroutineScope()), { it },
+                    contentPadding = PaddingValues(bottom = 240.dp),
+                )
+            }
+        }
+        compose.onRoot().performTouchInput { click(Offset(centerX, bottom - 8f)) }
+        compose.waitForIdle()
+        val selection = controller.state.selection as TextSelection
+        assertEquals(2, selection.head.offset)
+        assertEquals(selection.anchor, selection.head)
+        assertTrue(controller.focused)
+    }
+
+    /** Moving on from the title puts the cursor at the start of the body and focuses it; a note that cannot be edited stays as it is. */
+    @Test
+    fun focusStartPutsTheCursorAtTheStart() {
+        val controller = show("<p>ab</p>\n<p>cd</p>")
+        compose.runOnIdle { controller.focusEnd() }
+        compose.waitForIdle()
+        compose.runOnIdle { assertTrue(controller.focusStart()) }
+        compose.waitForIdle()
+        val selection = controller.state.selection as TextSelection
+        val first = (controller.state.doc.items.first() as Block).id
+        assertEquals(Point(first, 0), selection.head)
+        assertEquals(selection.anchor, selection.head)
+        assertTrue(controller.focused)
+        compose.runOnIdle {
+            controller.editable = false
+            assertFalse(controller.focusStart())
+        }
+    }
 }
+
 
 /** The magnifier of a long press, which Robolectric cannot draw: its window has no surface there. */
 @Implements(Magnifier::class)
