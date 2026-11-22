@@ -58,6 +58,7 @@
     <string name="license_mit" translatable="false">MIT</string>
     <string name="license_apache" translatable="false">Apache 2.0</string>
     <string name="license_bsd" translatable="false">BSD 3-Clause</string>
+    <string name="license_bsd_2" translatable="false">BSD 2-Clause</string>
     <string name="license_ksyntaxhighlighting" translatable="false">MIT, LGPL, GPL</string>
     <string name="first_start_download">Download from SFTP</string>
     <string name="library_local_only">This library exists only on this phone. Connect a sync storage to keep a second copy and share it with your computers.</string>
@@ -65,6 +66,8 @@
     <string name="component_sshj" translatable="false">sshj, ASN.1 One</string>
     <string name="component_slf4j" translatable="false">SLF4J</string>
     <string name="component_bouncycastle" translatable="false">Bouncy Castle</string>
+    <string name="component_commonmark" translatable="false">commonmark-java</string>
+    <string name="component_autolink" translatable="false">autolink-java</string>
     <!-- Rules. -->
     <string name="settings_rules">Rules</string>
     <string name="settings_rules_none">None</string>

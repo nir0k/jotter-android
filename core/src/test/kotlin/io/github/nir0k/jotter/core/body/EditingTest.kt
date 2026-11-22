@@ -168,11 +168,30 @@ class EditingTest {
         assertEquals(3, doc.findMatches("CAT").size)
     }
 
-    /** A paste of several blocks splits the current one; a single paragraph goes into it. */
+    /**
+     * A paste of several blocks splits the current one as the desktop's Qt inserts a fragment: the
+     * first pasted paragraph joins the text before the cursor in its format, the last pasted block
+     * takes the text after it in its own, and the cursor goes between them; a single paragraph goes
+     * into the current block.
+     */
     @Test
     fun paste() {
         val two = state("<p>ab</p>", 1).paste(parseBody("<p>1</p>\n<h1>2</h1>"))!!
-        assertEquals("<p>a</p>\n<p>1</p>\n<h1>2</h1>\n<p>b</p>", two.body)
+        assertEquals("<p>a1</p>\n<h1>2b</h1>", two.body)
+        val cursor = two.selection as TextSelection
+        assertEquals(Point((two.doc.items[1] as Block).id, 1), cursor.head)
+        assertEquals("<h2>a1</h2>\n<p>2b</p>", state("<h2>ab</h2>", 1).paste(parseBody("<h1>1</h1>\n<p>2</p>"))!!.body)
+        // A list, a divider and a frame keep apart from the text before the cursor; a divider and a frame from the text after it.
+        assertEquals("<p>a</p>\n<ul>\n<li>1</li>\n<li>2b</li>\n</ul>", state("<p>ab</p>", 1).paste(parseBody("<ul><li>1</li><li>2</li></ul>"))!!.body)
+        assertEquals("<p>a</p>\n<hr>\n<p>1b</p>", state("<p>ab</p>", 1).paste(parseBody("<hr><p>1</p>"))!!.body)
+        assertEquals("<p>a1</p>\n<hr>\n<p>b</p>", state("<p>ab</p>", 1).paste(parseBody("<p>1</p><hr>"))!!.body)
+        assertEquals("<p>a1</p>\n<pre><code>x</code></pre>\n<p>b</p>", state("<p>ab</p>", 1).paste(parseBody("<p>1</p><pre><code>x</code></pre>"))!!.body)
+        // At the start of a block the first pasted block keeps its format, at the end the block keeps its own.
+        val start = state("<p>ab</p>", 0)
+        val atStart = start.paste(parseBody("<h1>1</h1>\n<p>2</p>"))!!
+        assertEquals("<h1>1</h1>\n<p>2ab</p>", atStart.body)
+        assertEquals((start.doc.items[0] as Block).id, (atStart.doc.items[0] as Block).id)
+        assertEquals("<p>ab1</p>\n<h1>2</h1>", state("<p>ab</p>", 2).paste(parseBody("<p>1</p>\n<h1>2</h1>"))!!.body)
         val one = state("<p>ab</p>", 1).paste(parseBody("<p><em>1</em></p>"))!!
         assertEquals("<p>a<em>1</em>b</p>", one.body)
         val (pending, requests) = parseBody("<p><img src=\"../attachments/other/a.png\"></p>").withPendingObjects("note") { "#1" }

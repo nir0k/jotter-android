@@ -319,8 +319,11 @@ fun Doc.withPendingObjects(note: String, token: () -> String): Pair<Doc, List<St
 }
 
 /**
- * Pastes content at the selection: a single paragraph goes into the current block; other content
- * splits it, its blocks and frames going between the halves. In a table cell frames become
+ * Pastes content at the selection as the desktop inserts a fragment: a single paragraph goes into
+ * the current block. Otherwise a first pasted paragraph joins the text before the cursor in the
+ * current block's format, and the last pasted block, unless a divider, takes the text after the
+ * cursor in its own format; a list item, a divider or a frame at the start, and a divider or a
+ * frame at the end, stay apart from the current block's text. In a table cell frames become
  * paragraphs, as cells hold none; in a code block the content's plain text is inserted.
  */
 fun EditorState.paste(content: Doc): EditorState? {
@@ -333,7 +336,6 @@ fun EditorState.paste(content: Doc): EditorState? {
     val container = at.run.container
     val (index, offset) = at.run.locate(at.from)
     val block = at.run.blocks[index]
-    val left = block.withInline(slice(block.inline, 0, offset))
     val pasted: List<Item> = if (container == RootContainer) content.items else content.items.flatMap { item ->
         when (item) {
             is Block -> listOf(item)
@@ -341,24 +343,37 @@ fun EditorState.paste(content: Doc): EditorState? {
             is Table -> item.cells.flatten().flatten()
         }
     }
-    val right = Block(id = if (offset == 0 && pasted.firstOrNull() !is Block) block.id else newId(), heading = block.heading, quote = block.quote, list = block.list, inline = normalized(slice(block.inline, offset, block.length)))
-    // A run keeps its key while its first block lives: a paste at the start of a block takes the block's identifier.
-    val pastedItems = pasted.mapIndexed { i, item ->
+    if (pasted.isEmpty()) return cleared
+    // A run keeps its key while its first block lives: a paste at the start of a block takes the block's
+    // identifier, which goes to the block after a pasted frame when the paste starts with one.
+    val keyAfter = offset == 0 && pasted.first() !is Block
+    val halves = pasted.mapIndexed { i, item ->
         if (item !is Block) item else item.copy(id = if (i == 0 && offset == 0) block.id else newId())
+    }.toMutableList()
+    if (offset > 0) {
+        val before = slice(block.inline, 0, offset)
+        val first = halves.first()
+        if (first is Block && first.list == null && !first.hr) halves[0] = block.withInline(normalized(before + first.inline))
+        else halves.add(0, block.withInline(normalized(before)))
     }
-    if (pastedItems.isEmpty()) return cleared
-    val halves = buildList {
-        if (offset > 0) add(left)
-        addAll(pastedItems)
-        if (offset < block.length) add(right)
+    // The cursor goes after the pasted content: into the last pasted block, before the text after the cursor.
+    val lastIndex = halves.lastIndex
+    val last = halves[lastIndex]
+    val cursor = (last as? Block)?.length ?: 0
+    if (offset < block.length) {
+        val after = slice(block.inline, offset, block.length)
+        if (last is Block && !last.hr) {
+            halves[lastIndex] = last.copy(id = if (keyAfter) block.id else last.id, inline = normalized(last.inline + after))
+        } else {
+            halves += Block(id = if (keyAfter) block.id else newId(), heading = block.heading, quote = block.quote, list = block.list, inline = normalized(after))
+        }
     }
     val items = cleared.doc.itemsIn(container)
     val replaced = replaceRange(items, at.run.start + index, at.run.start + index + 1, halves)
     val newDoc = cleared.doc.withItemsIn(container, if (container == RootContainer) framed(replaced) else replaced)
-    // The cursor goes to the end of the last pasted block, or to the start of the block after a pasted frame.
-    val target = pastedItems.last()
-    val selection = when (target) {
-        is Block -> TextSelection(container, Point(target.id, target.length), Point(target.id, target.length))
+    // After a pasted frame the cursor goes to the start of the block after it.
+    val selection = when (val target = halves[lastIndex]) {
+        is Block -> TextSelection(container, Point(target.id, cursor), Point(target.id, cursor))
         else -> {
             val list = newDoc.itemsIn(container)
             val after = list.getOrNull(list.indexOfFirst { it.id == target.id } + 1)

@@ -52,7 +52,6 @@ import io.github.nir0k.jotter.core.body.InsertedFile
 import io.github.nir0k.jotter.core.body.StoreRequest
 import io.github.nir0k.jotter.core.format.ImageKind
 import io.github.nir0k.jotter.core.format.StoredFile
-import io.github.nir0k.jotter.editor.CodeExtensions
 import io.github.nir0k.jotter.editor.CodeLanguages
 import io.github.nir0k.jotter.editor.CodeRef
 import io.github.nir0k.jotter.editor.EditorHost
@@ -62,6 +61,7 @@ import io.github.nir0k.jotter.editor.NoteColors
 import io.github.nir0k.jotter.editor.NoteEditor
 import io.github.nir0k.jotter.editor.NoteEditorController
 import io.github.nir0k.jotter.editor.NoteImages
+import io.github.nir0k.jotter.editor.typedLanguage
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.rememberCoroutineScope
@@ -219,16 +219,6 @@ private fun Context.isChangingConfigurations(): Boolean {
         current = current.baseContext
     }
     return false
-}
-
-/**
- * Returns the stored language of a language typed after ```: a known key, the name a language is shown
- * with, or a file extension; otherwise what was typed, in lower case.
- */
-private fun typedLanguage(typed: String): String {
-    val key = typed.lowercase()
-    if (CodeLanguages.any { it.key == key }) return key
-    return CodeLanguages.firstOrNull { it.name.lowercase() == key }?.key ?: CodeExtensions[key] ?: key
 }
 
 /** Where `[[` or the cursor was when the note picker opened: the run and the brackets' offsets. */

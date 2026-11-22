@@ -82,3 +82,14 @@ val CodeExtensions: Map<String, String> = mapOf(
     "service" to "systemd unit", "ts" to "typescript", "tsx" to "typescript react (tsx)", "yml" to "yaml",
     "php" to "php/php", "dart" to "dart", "go" to "go", "lua" to "lua", "swift" to "swift", "zig" to "zig", "vue" to "vue",
 )
+
+/**
+ * Returns the stored language of a language typed after ``` or named by a Markdown code fence: a
+ * known key, the name a language is shown with, or a file extension; otherwise what was typed, in
+ * lower case.
+ */
+fun typedLanguage(typed: String): String {
+    val key = typed.lowercase()
+    if (CodeLanguages.any { it.key == key }) return key
+    return CodeLanguages.firstOrNull { it.name.lowercase() == key }?.key ?: CodeExtensions[key] ?: key
+}

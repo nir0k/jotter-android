@@ -76,6 +76,7 @@ import io.github.nir0k.jotter.core.body.parseBody
 import io.github.nir0k.jotter.core.body.parsePastedHtml
 import io.github.nir0k.jotter.core.body.paste
 import io.github.nir0k.jotter.core.body.plainText
+import io.github.nir0k.jotter.core.body.readMarkdown
 import io.github.nir0k.jotter.core.body.removeLink
 import io.github.nir0k.jotter.core.body.moveSelectedObject
 import io.github.nir0k.jotter.core.body.removeObject
@@ -663,11 +664,12 @@ class NoteEditorController(
     private fun nextToken(): String = "#${++lastToken}"
 
     /**
-     * Pastes content of the clipboard: HTML copied from a note reads back in the note vocabulary,
-     * other HTML through the paste cleaning; pictures and other notes' files wait until the screen
-     * stores them in this note's folder.
+     * Pastes content of the clipboard: HTML copied from a note reads back in the note vocabulary;
+     * text with Markdown formatting reads as Markdown, even when HTML comes with it, as editors
+     * offer HTML for copied Markdown too; other HTML goes through the paste cleaning. Pictures and
+     * other notes' files wait until the screen stores them in this note's folder.
      *
-     * @return Whether the paste was taken; plain text is left to the field.
+     * @return Whether the paste was taken; text without Markdown formatting is left to the field.
      */
     internal fun pasteClip(clip: ClipData): Boolean {
         if (!editable || clip.itemCount == 0) return false
@@ -683,9 +685,17 @@ class NoteEditorController(
             commit(state.insertInlineObjects(range, pieces))
             return true
         }
-        val html = clip.getItemAt(0).htmlText ?: return false
         if (state.selection is CodeSelection) return false
-        val content = if (html.startsWith(CopyMarker)) parseBody(html.substringAfter("-->")) else parsePastedHtml(html)
+        val item = clip.getItemAt(0)
+        val html = item.htmlText
+        val text = item.text?.toString()
+        val content = when {
+            html != null && html.startsWith(CopyMarker) -> parseBody(html.substringAfter("-->"))
+            // Bare web addresses alone are no reason to drop the formatting of the HTML.
+            html != null -> text?.let { readMarkdown(it, requireExplicitSyntax = true, language = language) } ?: parsePastedHtml(html)
+            text != null -> readMarkdown(text, language = language) ?: return false
+            else -> return false
+        }
         val (prepared, requests) = content.withPendingObjects(noteId, ::nextToken)
         commit(state.paste(prepared))
         requests.forEach(host::onStore)

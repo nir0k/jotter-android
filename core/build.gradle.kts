@@ -13,5 +13,12 @@ dependencies {
     implementation(libs.sshj)
     implementation(libs.bouncycastle.prov)
     implementation(libs.bouncycastle.pkix)
+    // GitHub Markdown on paste, as the desktop reads it with md4c: tables, strikethrough, task lists
+    // and bare addresses as links.
+    implementation(libs.commonmark)
+    implementation(libs.commonmark.ext.gfm.tables)
+    implementation(libs.commonmark.ext.gfm.strikethrough)
+    implementation(libs.commonmark.ext.task.list.items)
+    implementation(libs.commonmark.ext.autolink)
     testImplementation(libs.junit)
 }

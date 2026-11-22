@@ -11,10 +11,13 @@ import io.github.nir0k.jotter.core.format.tokenizeHtml
 
 // Reading a body into the model: a port of the desktop's reader (editor/HtmlCodec.cpp), which
 // builds its document block by block from the HTML's tokens. Pasted HTML goes through the same
-// reader in its paste mode.
+// reader in its paste mode, and pasted Markdown, converted to HTML, in its Markdown mode.
 
-/** Whether HTML is a note body or pasted from another program. */
-private enum class Mode { Note, Paste }
+/**
+ * Where HTML comes from: a note body, another program, or pasted Markdown, which reads like pasted
+ * HTML except that its text keeps its white space, which Markdown has already resolved.
+ */
+private enum class Mode { Note, Paste, Markdown }
 
 /** Removes Qt's white space from both ends of text, as `QString::trimmed`. */
 internal fun qtTrimmed(text: String): String = text.trim { it.isQtSpace() }
@@ -113,7 +116,7 @@ private fun applyInline(token: HtmlToken, format: FormatBuilder, mode: Mode) {
             // Links keep only the addresses a note accepts; others become text. A note file may come
             // from another program, so its links are checked as well as pasted ones.
             var href = token.attribute("href")
-            if (mode == Mode.Paste) {
+            if (mode != Mode.Note) {
                 href = if (':' in href) normaliseLink(href) else ""
             } else if (noteLinkTarget(href) == null && !isWebLink(href)) {
                 href = ""
@@ -127,7 +130,7 @@ private fun applyInline(token: HtmlToken, format: FormatBuilder, mode: Mode) {
             if (family.isNotEmpty()) format.family = family
         }
     }
-    if (mode == Mode.Paste && token.hasAttribute("style")) applyPastedStyle(token.attribute("style"), format)
+    if (mode != Mode.Note && token.hasAttribute("style")) applyPastedStyle(token.attribute("style"), format)
 }
 
 private val WidthStyle = Regex("width\\s*:\\s*([0-9]+(?:\\.[0-9]+)?)\\s*%")
@@ -262,7 +265,11 @@ private class Reader(private val mode: Mode) {
     /** Handles a start tag. */
     private fun start(token: HtmlToken) {
         val name = token.name
-        if (code != null) return // A code block is plain text; elements inside it are dropped.
+        if (code != null) {
+            // A line feed inside the canonical `<code>` is data, not layout after `<pre>`.
+            if (name == "code") codeStart = false
+            return // A code block is plain text; elements inside it are dropped.
+        }
         if (attachment != null) return // An attachment chip shows its name only.
         if (name == "table") {
             startTable()
@@ -403,7 +410,7 @@ private class Reader(private val mode: Mode) {
             text = text.replace(PastedSpace, " ")
             if (!inBlock || block.inline.isEmpty()) text = text.trimStart(' ')
         } else {
-            // Line breaks in a note's source only lay out the HTML; `<br>` is the line break.
+            // Line breaks in a note's or converted Markdown's source only lay out the HTML; `<br>` is the line break.
             text = text.replace("\r", "").replace("\n", "")
         }
         if (text.isEmpty()) return
@@ -549,11 +556,16 @@ fun parseBody(html: String): Doc = Doc(Reader(Mode.Note).read(html))
  * images waiting to be stored, their address in `pending`; pictures of local files are left out,
  * as the application cannot read them.
  */
-fun parsePastedHtml(html: String): Doc {
-    val doc = Doc(Reader(Mode.Paste).read(html))
+fun parsePastedHtml(html: String): Doc = Doc(Reader(Mode.Paste).read(html)).withoutLocalPictures()
+
+/** Reads HTML converted from pasted Markdown, as [parsePastedHtml] reads pasted HTML but keeping its text's white space. */
+internal fun parseMarkdownHtml(html: String): Doc = Doc(Reader(Mode.Markdown).read(html)).withoutLocalPictures()
+
+/** Leaves out pictures of local files, which the application cannot read; pictures in `data:` addresses stay. */
+private fun Doc.withoutLocalPictures(): Doc {
     fun keep(piece: Inline) = !(piece is ImageObject && piece.pending.isNotEmpty() && !piece.pending.startsWith("data:"))
     fun clean(block: Block) = if (block.inline.all(::keep)) block else block.withInline(block.inline.filter(::keep))
-    return Doc(doc.items.map { item ->
+    return Doc(items.map { item ->
         when (item) {
             is Block -> clean(item)
             is Table -> item.copy(cells = item.cells.map { row -> row.map { cell -> cell.map(::clean) } })

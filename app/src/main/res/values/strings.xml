@@ -57,5 +57,8 @@
     <string name="capture_read_only_text">It was written by a newer version of Jotter. Update the application to add notes.</string>
     <string name="capture_open_jotter">Open Jotter</string>
     <string name="capture_failed">The note could not be created.</string>
+    <string name="capture_unreadable_title">The file cannot become a note</string>
+    <string name="capture_unreadable_too_large">It is larger than 1 MB.</string>
+    <string name="capture_unreadable_not_text">It is not a UTF-8 text file.</string>
     <string name="trash_empty_action">Empty trash</string>
 </resources>
