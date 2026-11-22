@@ -39,6 +39,13 @@ class CodecTest {
         assertEquals("<pre><code>x</code></pre>", serializeBody(parseBody("<pre><code>x</code></pre>")))
     }
 
+    /** A code block's first empty line stays: only a line feed right after `<pre>` lays out the HTML. */
+    @Test
+    fun codeStartingWithAnEmptyLine() {
+        assertEquals("<pre><code>\nx\n</code></pre>", serializeBody(parseBody("<pre><code>\nx\n</code></pre>")))
+        assertEquals("<pre><code>x</code></pre>", serializeBody(parseBody("<pre>\n<code>x</code></pre>")))
+    }
+
     /** Links of other schemes read as text, and a formatted line break stays inside its element. */
     @Test
     fun linksAndLineBreaks() {

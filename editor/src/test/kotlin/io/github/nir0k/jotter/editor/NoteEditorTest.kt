@@ -1,6 +1,8 @@
 package io.github.nir0k.jotter.editor
 
 import android.app.Application
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.widget.Magnifier
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,6 +15,7 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextInputSelection
 import androidx.compose.ui.test.performTouchInput
@@ -31,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import io.github.nir0k.jotter.core.body.Block
 import io.github.nir0k.jotter.core.body.Point
 import io.github.nir0k.jotter.core.body.TextSelection
+import io.github.nir0k.jotter.core.body.plainText
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -38,6 +42,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import org.robolectric.annotation.Implementation
@@ -153,6 +158,36 @@ class NoteEditorTest {
         compose.waitForIdle()
         assertEquals("<p>word</p>", controller.body())
     }
+
+    /** Pastes a clip at the end of a one-paragraph body through the field's paste action and returns the body. */
+    private fun pasted(clip: ClipData, body: String = "<p>ab</p>"): String {
+        val controller = show(body)
+        val field = compose.onAllNodes(hasSetTextAction()).onFirst()
+        field.performClick()
+        field.performTextInputSelection(TextRange(controller.state.doc.plainText().length))
+        RuntimeEnvironment.getApplication().getSystemService(ClipboardManager::class.java).setPrimaryClip(clip)
+        field.performSemanticsAction(SemanticsActions.PasteText)
+        compose.waitForIdle()
+        return controller.body()
+    }
+
+    /** Pasted text with Markdown formatting reads as Markdown. */
+    @Test
+    fun pastedMarkdown() = assertEquals(
+        "<h1>Title</h1>\n<p><strong>bold</strong></p>",
+        pasted(ClipData.newPlainText(null, "# Title\n\n**bold**"), "<p></p>"),
+    )
+
+    /** Markdown in the text of a clip goes before the HTML that comes with it, as editors offer for copied Markdown. */
+    @Test
+    fun pastedMarkdownWithHtml() = assertEquals(
+        "<p>ab</p>\n<ul>\n<li>a</li>\n<li>b</li>\n</ul>",
+        pasted(ClipData.newHtmlText(null, "- a\n- b", "<p>- a</p><p>- b</p>")),
+    )
+
+    /** Pasted text without Markdown formatting goes in as it is. */
+    @Test
+    fun pastedPlainText() = assertEquals("<p>abx_y 2 * 3</p>", pasted(ClipData.newPlainText(null, "x_y 2 * 3")))
 
     /** A dragged image handle sets a width from 10 % to full, taking a preset within 3 of it. */
     @Test

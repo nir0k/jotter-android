@@ -47,8 +47,8 @@ import io.github.nir0k.jotter.designsystem.theme.ThemePalette
 import io.github.nir0k.jotter.R
 
 /**
- * CaptureActivity is the capture screen: the note alone, opened by the app shortcut, the Quick Settings tile and the share sheet. Shared content opens
- * over the sharing application, so Back returns there; the shortcut and the tile open it in a task of its own, outside the recent screens. It shares the
+ * CaptureActivity is the capture screen: the note alone, opened by the app shortcut, the Quick Settings tile, the share sheet and a text file another
+ * application opens in Jotter. Shared content and opened files open over the other application, so Back returns there; the shortcut and the tile open it in a task of its own, outside the recent screens. It shares the
  * library with the main screen, which it leaves as it was.
  */
 class CaptureActivity : ComponentActivity() {
@@ -101,7 +101,7 @@ private fun CaptureApp(app: JotterApplication, model: CaptureModel, request: Cap
 
 /**
  * CaptureStatus is the capture screen before its note opens: the progress of copying shared
- * files, or why no note could be created.
+ * files, or why no note could be created, such as an opened file that is not a text file.
  *
  * @param state What to show; not [CaptureState.Ready].
  * @param onRetry Tries again after a failure.
@@ -121,6 +121,16 @@ fun CaptureStatus(state: CaptureState, onRetry: () -> Unit, onOpenJotter: () -> 
             CaptureState.ReadOnly -> EmptyState(
                 AppIcons.Note, stringResource(R.string.capture_read_only_title), stringResource(R.string.capture_read_only_text), modifier,
                 actionText = stringResource(R.string.capture_open_jotter), onAction = onOpenJotter,
+            )
+            is CaptureState.Unreadable -> EmptyState(
+                AppIcons.Error, stringResource(R.string.capture_unreadable_title),
+                stringResource(
+                    when (state.problem) {
+                        FileProblem.TooLarge -> R.string.capture_unreadable_too_large
+                        FileProblem.NotText -> R.string.capture_unreadable_not_text
+                    },
+                ),
+                modifier,
             )
             CaptureState.Failed -> ErrorState(stringResource(R.string.capture_failed), onRetry, modifier)
             is CaptureState.Ready -> LoadingState(modifier)

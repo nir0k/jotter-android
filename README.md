@@ -10,11 +10,11 @@ Jotter for Android is the phone client of [Jotter](https://github.com/nir0k/Jott
 
 ## Features
 
-- A native rich text editor with headings, lists and checklists, tables, images, attachments, code blocks with syntax highlighting, note links and Markdown shortcuts while typing.
+- A native rich text editor with headings, lists and checklists, tables, images, attachments, code blocks with syntax highlighting, note links, Markdown shortcuts while typing and Markdown on paste.
 - Nested collections, nested tags with colours, favourites, an archive and a trash.
 - Full-text search that finds every form of a word in English and Russian, with filters by collection, tag and date.
 - Rules that file notes into collections by their tags.
-- Quick capture from an app shortcut, a Quick Settings tile and the system share sheet.
+- Quick capture from an app shortcut, a Quick Settings tile and the system share sheet; Markdown and plain text files open in Jotter as new notes.
 - Export to PDF, HTML and JPG.
 - Synchronisation of a library through a folder on your own SFTP server, with three-way merges and conflict copies, in the background or on request.
 - Light and dark themes, several palettes, English and Russian interface.
@@ -43,4 +43,4 @@ A library is a folder of HTML notes and a few JSON files, shared with Jotter for
 
 Jotter for Android is licensed under the [Apache License 2.0](LICENSE).
 
-The application includes [Bootstrap Icons](https://icons.getbootstrap.com/) (MIT), the syntax definitions and themes of [KDE SyntaxHighlighting](https://invent.kde.org/frameworks/syntax-highlighting) (each file under the licence it names: MIT, LGPL, Apache 2.0, GPL or BSD, WTFPL), the [Snowball](https://snowballstem.org/) stemmers (BSD 3-Clause), [sshj](https://github.com/hierynomus/sshj) (Apache 2.0), [Bouncy Castle](https://www.bouncycastle.org/) (MIT), [SLF4J](https://www.slf4j.org/) (MIT), [Protocol Buffers](https://protobuf.dev/) (BSD 3-Clause) and AndroidX, Jetpack Compose and the Kotlin libraries (Apache 2.0). Their licence texts are in [app/src/main/assets/licenses/](app/src/main/assets/licenses/) and in Settings → General → About → Licences.
+The application includes [Bootstrap Icons](https://icons.getbootstrap.com/) (MIT), the syntax definitions and themes of [KDE SyntaxHighlighting](https://invent.kde.org/frameworks/syntax-highlighting) (each file under the licence it names: MIT, LGPL, Apache 2.0, GPL or BSD, WTFPL), the [Snowball](https://snowballstem.org/) stemmers (BSD 3-Clause), [sshj](https://github.com/hierynomus/sshj) (Apache 2.0), [Bouncy Castle](https://www.bouncycastle.org/) (MIT), [SLF4J](https://www.slf4j.org/) (MIT), [commonmark-java](https://github.com/commonmark/commonmark-java) (BSD 2-Clause), [autolink-java](https://github.com/robinst/autolink-java) (MIT), [Protocol Buffers](https://protobuf.dev/) (BSD 3-Clause) and AndroidX, Jetpack Compose and the Kotlin libraries (Apache 2.0). Their licence texts are in [app/src/main/assets/licenses/](app/src/main/assets/licenses/) and in Settings → General → About → Licences.

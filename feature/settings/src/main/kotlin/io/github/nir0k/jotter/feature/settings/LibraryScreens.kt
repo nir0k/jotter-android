@@ -182,6 +182,8 @@ val Components = listOf(
     Component(R.string.component_sshj, R.string.license_apache, Apache),
     Component(R.string.component_slf4j, R.string.license_mit, "SLF4J-MIT.txt"),
     Component(R.string.component_bouncycastle, R.string.license_mit, "Bouncy-Castle-MIT.txt"),
+    Component(R.string.component_commonmark, R.string.license_bsd_2, "commonmark-java-BSD-2-Clause.txt"),
+    Component(R.string.component_autolink, R.string.license_mit, "autolink-java-MIT.txt"),
     Component(R.string.component_ksyntaxhighlighting, R.string.license_ksyntaxhighlighting, "KSyntaxHighlighting.txt"),
 )
 

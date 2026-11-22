@@ -61,5 +61,8 @@
     <string name="capture_read_only_text">Её записала более новая версия Jotter. Обновите приложение, чтобы добавлять заметки.</string>
     <string name="capture_open_jotter">Открыть Jotter</string>
     <string name="capture_failed">Не удалось создать заметку.</string>
+    <string name="capture_unreadable_title">Из файла не получится заметка</string>
+    <string name="capture_unreadable_too_large">Он больше 1 МБ.</string>
+    <string name="capture_unreadable_not_text">Это не текстовый файл в UTF-8.</string>
     <string name="trash_empty_action">Очистить корзину</string>
 </resources>

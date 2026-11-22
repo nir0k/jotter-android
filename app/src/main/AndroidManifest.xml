@@ -24,9 +24,10 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <!-- The capture screen of the app shortcut, the Quick Settings tile and the share sheet:
-             shared content opens over the sharing application; the shortcut and
-             the tile open it in a task of its own, outside the recent screens. -->
+        <!-- The capture screen of the app shortcut, the Quick Settings tile, the share sheet and
+             Open with for Markdown and plain text files: shared content and opened files open over
+             the other application; the shortcut and the tile open it in a task of its own, outside
+             the recent screens. -->
         <activity
             android:name=".capture.CaptureActivity"
             android:excludeFromRecents="true"
@@ -43,6 +44,14 @@
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:mimeType="text/markdown" />
+                <data android:mimeType="text/x-markdown" />
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
         <service
